@@ -6,8 +6,10 @@
 > f'string': 即为python的格式化字符串
 > []: 起到“或”的作用
 目前进行了如下统计分析工作：
-- 数据的非空率，即 1 减去 缺失率，路径为：./c+'Weather_ori_1_prop_non_null.csv'
-- 分布情况，路径为：./distribution/c+f'Weather_ori_1_{col_name}.csv'，
+- 数据的非空率，即 1 减去 缺失率，路径为：./{c}/c+'Weather_ori_1_prop_non_null.csv'
+- 分布情况，路径为：./{c}/distribution/c+f'Weather_ori_1_{col_name}.csv'，
   - 另外还利用df.plot.area()，画出了区域图，路径同上，除了文件后缀为.png
 - 异常值比例，其中异常值根据均值和标准差算出，分别计算偏离均值超过2个或3个标准差的数值的比例，保存在同一个csv中
+  - 路径为: ./{c}/c+'Weather_ori_1_outlier_ratio.csv'
 - 超出[2, 3]个标准差的异常值的索引，索引为该异常值出现的时间（天气数据是有时间的），以方便直接去数据集中检查
+  - 路径为: ./{c}/outlier_value_[2, 3]std/c+f'Weather_ori_1_{col_name}_outlier_value.csv'
