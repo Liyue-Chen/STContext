@@ -4,7 +4,8 @@
 > c: 即city，城市名  
 > col_name: 即列的名字，具体有哪些列，说明在../README.md   
 > f'string': 即为python的格式化字符串  
-> []: 起到“或”的作用
+> []: 起到“或”的作用  
+> 
 目前进行了如下统计分析工作：
 - 数据的非空率，即 1 减去 缺失率，路径为：./{c}/c+'Weather_ori_1_prop_non_null.csv'
 - 分布情况，路径为：./{c}/distribution/c+f'Weather_ori_1_{col_name}.csv'，
