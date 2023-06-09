@@ -55,3 +55,7 @@
 - secondary_swell_period: 次涌浪周期
 - secondary_swell_height: 次涌浪高度
 - secondary_swell_direction: 次涌浪方向
+
+> 备注
+> - 2023/6/9 Melbourne数据集的时间范围有变化，重新爬取并处理  
+值得注意的是，新爬取到的Melbourne数据集，其valid_time_gmt，即时刻的格式，与之前爬取的数据的格式略有不同，可能是datetime包更新了导致，在”analyze_wxx.ipynb”的“3. 先对其进行处理，使每小时内的所有数据合并”中，在第30行左右的，关于valid_time_gmt的处理代码，用于新爬取到的Melbourne上会报错（但是不是在此处报错，而是在后续运行”4.4 one-hot编码替换原始的wx_phrase”时，由于时间格式的不一致而导致处理函数不能正确处理，从而报错），需要专门为Melbourne调整一下，可以写个if来专门处理
