@@ -31,7 +31,7 @@ We store the polygonal areas of each region in Scenedevide in shape file.
 
 The different areas are divided in detail as follows:
 
-### 1 represents the CBD &nbsp;  &nbsp; 2 represents the central area of the city &nbsp; &nbsp;3: represents the non-central area of the city 
+### 1 represents the CBD &nbsp;  &nbsp; 2 represents the central area of the city &nbsp; &nbsp;3 represents the non-central area of the city 
 
 - Chicago_Bike:1 2 3 （overlap all nodes）
   
