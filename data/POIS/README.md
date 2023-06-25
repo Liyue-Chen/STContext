@@ -1,6 +1,3 @@
-## Welcome to StackEdit!
-
-
 ## Document Description：
 POIS:The six folders named after cities contain POI data for each of the six cities.
 
