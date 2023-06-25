@@ -9,11 +9,11 @@ POIS:The six folders named after cities contain POI data for each of the six cit
 
 Folder:_raw is the raw acquisition of POI data.
 
-   Each folder for the current city's POI file: file naming: "city - year - month - day.csv" (representing the current number and type of POI summary for this day under this city).
-
 Folder:_processed is the pre-processed data.
 
-    Each folder for the current city's POI file: file naming: "city - year - month - day.csv" (representing the current number and type of POI summary for this day under this city).
+   Each folder for the current city's POI file: file naming: "city - year - month - day.csv" (representing the current number and type of POI summary for this day under this city).
+
+
     
  - osmid&nbsp;&nbsp;&nbsp;​(OSM Number)
  - geometry (Geographical Location)
@@ -65,4 +65,12 @@ The shape file contains a polygon surrounded area, the area is the divided area.
 - Datasetname indicates the name of the dataset.
 - SceneNumber indicates the scene division number.
 
-Load the shape file and get a polygon. If the location of a point (latitude and longitude) is within a polygon, we can determine the point belongs to that area.
+We can use python or arcgis to open the shape file.
+
+If we use python:
+
+```Python
+pip install shapely
+pip install geopandas
+```
+Load the shape file and get a polygon. If the location of a point (latitude and longitude) is within a polygon, we can determine whether the point belongs to that area.
