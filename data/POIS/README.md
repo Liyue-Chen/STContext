@@ -1,54 +1,68 @@
 ## Welcome to StackEdit!
 
 
-## 文件说明：
-六个以城市命名的文件夹分别为六个城市的POI数据。
+## Document Description：
+POIS:The six folders named after cities contain POI data for each of the six cities.
 
 
-## 数据字典：
+## Data Dictionary：
 
-_raw为初始获取POI数据
+Folder:_raw is the raw acquisition of POI data.
 
-   每个文件夹下为当前城市的POI文件：文件命名方式：“城市-年-月-日.csv”(代表当前这个城市下的这一天的POI数量及种类汇总)
+   Each folder for the current city's POI file: file naming: "city - year - month - day.csv" (representing the current number and type of POI summary for this day under this city).
 
-_processed为预处理后数据
+Folder:_processed is the pre-processed data.
 
-   每个文件夹下为当前城市的POI文件：文件命名方式：“城市-年-月-日.csv”(代表当前这个城市下的这一天的POI数量及种类汇总)
+    Each folder for the current city's POI file: file naming: "city - year - month - day.csv" (representing the current number and type of POI summary for this day under this city).
+    
+ - osmid&nbsp;&nbsp;&nbsp;​(OSM Number)
+ - geometry (Geographical Location)
+ - name &nbsp;&nbsp;(POI Name)
+ - fclass&nbsp;&nbsp;&nbsp;(POI Category)
+ - lon  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Longitude)
+ - lat  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Latitude)
 
-注：由于OSM官网上加利福尼亚洲只有2019年以后的数据，因此BAY 和LA 是2019年1月1日的数据。其余城市的数据均为2013年1月1日到1月30日的数据
- - osmid（OSM编号）
- - geometry (地理位置)
- - name （POI名称）
- - fclass (POI种类)
- - lon （经度）
- - lat （维度）
-
-## Scenedivide：
+## Scenedivide Dataset：
 
 
-我们针对每个城市按照：城市中心商务区（CBD）、CBD除外的城市中心区，非中心区进行了一个划分，此次总共划分了4个城市：分别是NYC_Bike,Chicago_Bike,DC_bike,Melbourne。
-从而为了评判一个城市中不同区域地区内流量预测的情况。我们将每个地区的多边形区域以shp文件格式存储在Scenedevide中。
-不同地区的划分如下：
+In order to judge the traffic prediction within the different regional areas of a city,we divided each city into the following categories: Central Business District (CBD), Central District, and Non-Central District,three types of areas are mutually exclusive, and the prosperity of the area in decreasing order. A total of 4 cities were divided: NYC_Bike, Chicago_Bike, DC_bike, and Melbourne.
 
-### 1：代表CBD、2：代表城市中心区，3：代表城市非中心区(泛化区，三个区域互斥，且地区繁荣程度依次递减。
+We store the polygonal areas of each region in Scenedevide in shape file.
+
+The different areas are divided in detail as follows:
+
+### 1: represents the CBD 2: represents the central area of the city 3: represents the non-central area of the city 
 
 - Chicago_Bike:1 2 3 （overlap all nodes）
-  Chicago划分为3个区域，Chicago在行政区域上划分了中心商务区，因此这里我们将中心商务区作为1区，将中心商务区周围地区作为2区，将Chicago市其他区域作为3区
+  
+  Chicago is divided into 3 scenes, Here we devide the CBD of Chicago as Scene 1, the area around the CBD as Scene 2, and the rest of the city of Chicago as Scene 3.
 
   <img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/Scene_divide/Chicago_heat.png" width = "600" height = "400" alt="Chicago_heat" align=center />
   
 - NYC_Bike:1 2 3（overlap all nodes）
-  NYC划分为3个区域，纽约市下属的区域分为曼哈顿区、皇后区、布鲁克林区，根据地区经济繁荣程度，我们将曼哈顿区作为1区，皇后区作为2区，布鲁克林以及纽约市周边bike节点出现地区作为3区
+  
+  NYC is divided into 3 scenes, the region under New York City is divided into Manhattan, Queens and Brooklyn, according to the degree of regional economic prosperity, we devide Manhattan as Scene 1, Queens as Scene 2, Brooklyn and the areas around New York City  as Scene 3
 
   <img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/Scene_divide/NYC_Heat.png" width = "600" height = "400" alt="Chicago_heat" align=center />
   
 - DC_bike:1 2 3（overlap all nodes）
-  DC划分为3个区域，华盛顿在行政区划上分为4个区，包括东南区、西北区、西南区和东北区，西北地区为华盛顿特区经济最为活跃的地区，因此作为CBD中心1区，其余三个区（东南区、西南区、东北区）作为城市中心区（2区），还有部分bike node不在DC特区内，较为分散，我们将行政特区外的点设置为泛化区（3区）
+  
+   DC is divided into 3 scenes.Washington is divided into 4 districts in the administrative division, including the southeast, northwest, southwest and northeast.Among them, the northwest is the most economically active area of Washington DC, so as Scene 1 , the remaining three districts (southeast, southwest, northeast) as the Scene 2, there are also some external  bike nodes  outside Washington DC, we set the area distributed with external nodes  outside the administrative  as Scene 3.
 
-    <img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/Scene_divide/DC_heat.png" width = "600" height = "400" alt="Chicago_heat" align=center />
+   <img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/Scene_divide/DC_heat.png" width = "600" height = "400" alt="Chicago_heat" align=center />
 
 - Melbourne:1 2（overlap all nodes）
-  由于数据集所在地区区域小，因此Melbourne数据集只划分为两个区域：将Melbourne的CBD作为1区将Melbourne非CBD地区作为2区。
-
+  
+  Due to the  area occupied by the Melbourne dataset is small, the Melbourne dataset was divided into only two zones: the CBD of Melbourne as scene 1 and the non-CBD area of Melbourne as scene 2.
+ 
   <img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/Scene_divide/Melbourne_heat.png" width = "600" height = "400" alt="Chicago_heat" align=center />
 
+### Instructions for using the Scenedivide dataset
+
+The  file is stored in shape format, the file name: "Datasetname_SceneNumber.shp".Note that the shx file is a necessary adjunct to the shape file, thus shx files with the same file name must be downloaded in the same folder.
+
+The shape file contains a polygon surrounded area, the area is the divided area.
+- Datasetname indicates the name of the dataset.
+- SceneNumber indicates the scene division number.
+
+Load the shape file and get a polygon. If the location of a point (latitude and longitude) is within a polygon, we can determine the point belongs to that area.
