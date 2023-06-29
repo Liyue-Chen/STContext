@@ -11,6 +11,5 @@ Chicago -- 秋→冬
 DC -- 冬→春  
 LA -- 冬→春  
 Melbourne -- 秋→冬  
-NYC -- 夏→秋
-
+NYC -- 夏→秋  
 <img src="season_7_1_2/select/Chicago (2014092823 - 2015010623).png" width = "600" height = "400" alt="Chicago (2014092823 - 2015010623)" align=center />
