@@ -1,12 +1,13 @@
 # dataset and city
-dataset: Weather_scene
-name: extreme
-city: NYC
-start_date: 2014021523
-end_date: 2015090323
+dataset: 'scene\ExtremeWeather_7_1_2\NYC (2014021523 - 2014090323).csv'
+name: 'extreme'
+city: 'NYC'
+start_date: '2014021523'
+end_date: '2015090323'
 train_ratio: 0.7
 val_tatio: 0.1
 test_ratio: 0.2
+time_fitness: 60
 
 # closeness_len: 6
 # period_len: 7

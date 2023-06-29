@@ -1,12 +1,13 @@
 # dataset and city
-dataset: Weather_scene
-name: extreme
-city: Melbourne
-start_date: 2021081600
-end_date: 2022030400
+dataset: 'scene\ExtremeWeather_7_1_2\Melbourne (2021081600 - 2022030400).csv'
+name: 'extreme'
+city: 'Melbourne'
+start_date: '2021081600'
+end_date: '2022030400'
 train_ratio: 0.7
 val_tatio: 0.1
 test_ratio: 0.2
+time_fitness: 60
 
 # closeness_len: 6
 # period_len: 7
