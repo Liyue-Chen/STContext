@@ -4,10 +4,12 @@
   <img src="general_7_1_2/select/Chicago (2014092323 - 2015041123).png" width = "600" height = "400" alt="Chicago (2014092323 - 2015041123)" align=center />
 - 极端天气，在ExtremeWeather_7_1_2，4个  
 BAY和LA在收集到的数据集中，没有出现明显的极端天气，因此只选取了其余四个城市（地区）的极端天气测试场景，同样是200天的数据，其中包含尽可能多时刻的极端天气，主要考虑tornado（overcast为极端阴沉天气，从生活经验来看，其本身对于人流量的影响甚至可能不大于雨天，其影响来自于于伴随着的其他天气状况，比如极端阴沉可能伴随着下雨）
+<img src="ExtremeWeather_7_1_2/DC (2017020923 - 2017082823).png" width = "600" height = "400" alt="DC (2017020923 - 2017082823)" align=center />
 - 季节变迁，在season_7_1_2，6个  
 BAY -- 冬→春  
 Chicago -- 秋→冬  
 DC -- 冬→春  
 LA -- 冬→春  
 Melbourne -- 秋→冬  
-NYC -- 夏→秋  
+NYC -- 夏→秋
+<img src="season_7_1_2/select/Chicago (2014092823 - 2015010623).png" width = "600" height = "400" alt="Chicago (2014092823 - 2015010623)" align=center />
