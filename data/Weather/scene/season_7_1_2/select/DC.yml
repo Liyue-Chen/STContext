@@ -1,12 +1,13 @@
 # dataset and city
-dataset: Weather_scene
-name: season
-city: DC
-start_date: 2014122223
-end_date: 2015040123
+dataset: 'scene\season_7_1_2\select\DC (2014122223 - 2015040123).csv'
+name: 'season'
+city: 'DC'
+start_date: '2014122223'
+end_date: '2015040123'
 train_ratio: 0.7
 val_tatio: 0.1
 test_ratio: 0.2
+time_fitness: 60
 
 # closeness_len: 6
 # period_len: 7

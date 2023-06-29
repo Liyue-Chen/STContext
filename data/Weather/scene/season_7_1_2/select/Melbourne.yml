@@ -1,12 +1,13 @@
 # dataset and city
-dataset: Weather_scene
-name: season
-city: Melbourne
-start_date: 2021100800
-end_date: 2022011600
+dataset: 'scene\season_7_1_2\select\Melbourne (2021100800 - 2022011600).csv'
+name: 'season'
+city: 'Melbourne'
+start_date: '2021100800'
+end_date: '2022011600'
 train_ratio: 0.7
 val_tatio: 0.1
 test_ratio: 0.2
+time_fitness: 60
 
 # closeness_len: 6
 # period_len: 7

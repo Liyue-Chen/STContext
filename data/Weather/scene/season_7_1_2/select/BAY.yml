@@ -1,12 +1,13 @@
 # dataset and city
-dataset: Weather_scene
-name: season
-city: BAY
-start_date: 2017012200
-end_date: 2017032300
+dataset: 'scene\season_7_1_2\select\BAY (2017012200 - 2017032300).csv'
+name: 'season'
+city: 'BAY'
+start_date: '2017012200'
+end_date: '2017032300'
 train_ratio: 0.7
 val_tatio: 0.1
 test_ratio: 0.2
+time_fitness: 60
 
 # closeness_len: 6
 # period_len: 7
