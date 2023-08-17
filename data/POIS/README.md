@@ -4,20 +4,21 @@ POIS:The six folders named after cities contain POI data for each of the six cit
 
 ## Data Dictionary：
 
-Folder:_raw is the raw acquisition of POI data.
-
-Folder:_processed is the pre-processed data.
-
-   Each folder for the current city's POI file: file naming: "city - year - month - day.csv" (representing the current number and type of POI summary for this day under this city).
+Folder:RAWPOI is the raw acquisition of POI data.
+  
+  Each folder for the current city's POI file: file naming: "city - year - month - day.xls" (representing the current number and type of POI summary for this day under this city.eg:Bike_Chicago-2013-01-01.xls).
 
 
     
  - osmid&nbsp;&nbsp;&nbsp;​(OSM Number)
- - geometry (Geographical Location)
  - name &nbsp;&nbsp;(POI Name)
  - fclass&nbsp;&nbsp;&nbsp;(POI Category)
  - lon  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Longitude)
  - lat  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Latitude)
+
+Folder:PROCESSED POI is the pre-processed POI data.
+
+  
 
 ## Scenedivide Dataset：
 
