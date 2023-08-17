@@ -15,8 +15,13 @@ Folder:RAWPOI is the raw acquisition of POI data.
  - fclass&nbsp;&nbsp;&nbsp;(POI Category)
  - lon  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Longitude)
  - lat  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Latitude)
+ - FID  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Order Number)
+<img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/Scene_divide/Chicago_heat.png" width = "600" height = "400" alt="Chicago_heat" align=center />
+   
 
-Folder:PROCESSED POI is the pre-processed POI data.
+Folder:PROCESSED POI is the pre-processed POI data.(The format is  pkl files)
+
+
 
   
 
