@@ -29,7 +29,7 @@ The above is the distribution map of POI in the Melbourne dataset. From the grap
 
 When using POI data, for ease of use, we process the Excel file into a pickle file for easy loading. The pickle file stores a two-dimensional numpy array with the dimension of (Numnode, POI_type), where Numnode represents the number of sites and POI_Type is the number of POI types we are considering. The value of a site indicates the number of POIs of that kind within a radius of N meters.
 
-The value of N represents the site coverage.
+N represents the site coverage.
 
 Since the size of the area covered by the dataset is different, the value of N is also different.
 
