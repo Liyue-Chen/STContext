@@ -16,7 +16,7 @@ POIS:The six folders named after cities contain POI data for each of the six cit
  - FID  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Order Number)
 <img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/RAWPOI/Melbourne_POI_img.png" width = "950" height = "600" alt="Chicago_heat" align=center />
 
-The above is the distribution map of POI in the Melbourne dataset. From the graph, it can be seen that there are many types of POI, but we only consider some important POI categories when using them specifically.
+The above is the distribution map of POI in the Pedestrian Melbourne dataset. 
 
 
 
@@ -31,7 +31,7 @@ When using POI data, for ease of use, we process the Excel file into a pickle fi
 
 N represents the site coverage.
 
-Since the size of the area covered by the dataset is different, the value of N is also different.
+Since the size of the area covered by the dataset is different, the value of N is also different,The following table shows the values of N in different datasets.
 
 
 |  | Bike_NYC | Bike_DC | Bike_Chicago | Pedestrian_Melbourne |
@@ -39,9 +39,9 @@ Since the size of the area covered by the dataset is different, the value of N i
 | N(m)  | 500   | 350   | 350   | 130   |
 
 
-The following are the kinds of POIs considered for different datasets.
+From the graph, it can be seen that there are many types of POI, but we only consider some important POI categories when using them specifically.The following are the kinds of POIs considered for different datasets.
 
-## Bike_NYC：
+### Bike_NYC：
 
 
 
@@ -76,7 +76,7 @@ The following are the kinds of POIs considered for different datasets.
 </table>
 
 
-## Bike_DC：
+### Bike_DC：
 
 <table>
   <tr>
@@ -112,7 +112,7 @@ The following are the kinds of POIs considered for different datasets.
   </tr>
 </table>
 
-## Bike_Chicago：
+### Bike_Chicago：
 
 
 <table>
@@ -146,7 +146,7 @@ The following are the kinds of POIs considered for different datasets.
 </table>
 
 
-## Pedestrian_Melbourne：
+### Pedestrian_Melbourne：
 <table>
   <tr>
     <th colspan="6" style="text-align:center;">Bike_DC POI Type</th>
