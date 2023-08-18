@@ -16,10 +16,40 @@ Folder:RAWPOI is the raw acquisition of POI data.
  - lon  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Longitude)
  - lat  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Latitude)
  - FID  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Order Number)
-<img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/RAWPOI/Melbourne_POI_img.png" width = "600" height = "400" alt="Chicago_heat" align=center />
+<img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/RAWPOI/Melbourne_POI_img.png" width = "950" height = "600" alt="Chicago_heat" align=center />
+
+The above is the distribution map of POI in the Melbourne dataset. From the graph, it can be seen that there are many types of POI, and we only consider some important POI categories when using them specifically.
+
+
+
+
+
+
    
 
 Folder:PROCESSED POI is the pre-processed POI data.(The format is  pkl files)
+
+When using POI data, for ease of use, we process the Excel file into a pickle file for easy loading. The pickle file stores a two-dimensional numpy array with the dimension of (Numnode, POI_type), where Numnode represents the number of sites and POI_ Type is the number of POI types we are considering. The value of a site indicates the number of POIs of that kind within a radius of N meters.
+
+Since the size of the area covered by the dataset is different, the value of N is also different.(The value of N represents the site coverage.)
+
+
+|  | Bike_NYC | Bike_DC | Bike_Chicago | Pedestrian_Melbourne |
+|:--------:|:--------:|:--------:|:--------:|:--------:|
+| N(m)  | 500   | 350   | 350   | 130   |
+
+
+The following are the kinds of POIs considered for different datasets.
+
+## Bike_NYC：
+
+| 列1标题 | 列2标题 | 列3标题 | 列4标题 | 列5标题 | 列6标题 |
+| ------- | ------- | ------- | ------- | ------- | ------- |
+| 内容1   | 内容2   | 内容3   | 内容4   | 内容5   | 内容6   |
+| 内容7   | 内容8   | 内容9   | 内容10  | 内容11  | 内容12  |
+| 内容13  | 内容14  | 内容15  | 内容16  | 内容17  | 内容18  |
+| 内容19  | 内容20  | 内容21  | 内容22  | 内容23  | 内容24  |
+
 
 
 
