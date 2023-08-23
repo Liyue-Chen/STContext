@@ -32,150 +32,72 @@ When using POI data, for ease of use, we process the Excel file into a pickle fi
 N represents the site coverage.
 
 Since the size of the area covered by the dataset is different, the value of N is also different,The following table shows the values of N in different datasets.
-
+N as a parameter can be set to different values to generate different pickle files.
 
 |  | Bike_NYC | Bike_DC | Bike_Chicago | Pedestrian_Melbourne |
 |:--------:|:--------:|:--------:|:--------:|:--------:|
 | N(m)  | 500   | 350   | 350   | 130   |
 
 
-From the graph, it can be seen that there are many types of POI, but we only consider some important POI categories when using them specifically.The following are the kinds of POIs considered for different datasets.
 
-### Bike_NYC：
 
+From the graph, it can be seen that there are many types of POIs, but we only consider some important POIs when using them specifically.For each dataset, we selecte some important POIs. And we take the union of these POIs to get the final important POIs.
+
+### Final Important POIs：
 
 
 <table>
   <tr>
-    <th colspan="6" style="text-align:center;">Bike_NYC POI Type</th>
+    <th colspan="7" style="text-align:center;">Important POI List</th>
   </tr>
   <tr>
-    <td align="center">cafe</td>
+    <td align="center">fast_food</td>
+    <td align="center">taxi</td>
     <td align="center">school</td>
     <td align="center">restaurant</td>
-    <td align="center">fast_food</td>
-    <td align="center">bicycle_parking</td>
-    <td align="center">place_of_worship</td>
-  </tr>
-  <tr>
-    <td align="center">bank</td>
-    <td align="center">toilets</td>
-    <td align="center">fire_station</td>
     <td align="center">theatre</td>
-    <td align="center">hospital</td>
-    <td align="center">car_sharing</td>
-  </tr>
-  <tr>
-    <td align="center">library</td>
-    <td align="center">pharmacy</td>
-    <td align="center">post_office</td>
-    <td align="center">parking</td>
     <td align="center">pub</td>
-    <td align="center">-</td>
-  </tr>
-</table>
-
-
-### Bike_DC：
-
-<table>
-  <tr>
-    <th colspan="7" style="text-align:center;">Bike_DC POI Type</th>
-  </tr>
-  <tr>
-    <td align="center">cafe</td>
-    <td align="center">school</td>
-    <td align="center">restaurant</td>
-    <td align="center">fast_food</td>
-    <td align="center">bar</td>
-    <td align="center">place_of_worship</td>
-    <td align="center">post_office</td>
-  </tr>
-  <tr>
-    <td align="center">bench</td>
-    <td align="center">grave_yard</td>
-    <td align="center">post_box</td>
     <td align="center">doctors</td>
-    <td align="center">library</td>
-    <td align="center">theatre</td>
-    <td align="center">nightclub</td>
   </tr>
   <tr>
-    <td align="center">parking</td>
     <td align="center">kindergarten</td>
-    <td align="center">pharmacy</td>
-    <td align="center">embassy</td>
-    <td align="center">bank</td>
-    <td align="center">-</td>
-    <td align="center">-</td>
-   
-  </tr>
-</table>
-
-### Bike_Chicago：
-
-
-<table>
-  <tr>
-    <th colspan="6" style="text-align:center;">Bike_DC POI Type</th>
-  </tr>
-  <tr>
-    <td align="center">restaurant</td>
-    <td align="center">fast_food</td>
-    <td align="center">bank</td>
-    <td align="center">hospital</td>
-    <td align="center">place_of_worship</td>
-    <td align="center">pub</td>
-  </tr>
-  <tr>
-    <td align="center">theatre</td>
-    <td align="center">pharmacy</td>
-    <td align="center">fountain</td>
-    <td align="center">bicycle_parking</td>
-    <td align="center">post_box</td>
-    <td align="center">clock</td>
-  </tr>
-  <tr>
-    <td align="center">parking</td>
-    <td align="center">fire_station</td>
-    <td align="center">ferry_terminal</td>
-    <td align="center">bicycle_rental</td>
-    <td align="center">school</td>
-    <td align="center">cafe</td>
-  </tr>
-</table>
-
-
-### Pedestrian_Melbourne：
-<table>
-  <tr>
-    <th colspan="6" style="text-align:center;">Bike_DC POI Type</th>
-  </tr>
-  <tr>
-    <td align="center">restaurant</td>
+    <td align="center">bar</td>
     <td align="center">ice_cream</td>
     <td align="center">telephone</td>
     <td align="center">bench</td>
-    <td align="center">vending_machine</td>
-    <td align="center">bar</td>
+    <td align="center">bank</td>
+    <td align="center">place_of_worship</td>
   </tr>
   <tr>
-    <td align="center">bank</td>
+    <td align="center">bicycle_parking</td>
+    <td align="center">nightclub</td>
+    <td align="center">car_sharing</td>
+    <td align="center">post_box</td>
+    <td align="center">embassy</td>
+    <td align="center">cafe</td>
+    <td align="center">post_office</td>
+  </tr>
+   <tr>
+    <td align="center">vending_machine</td>
+    <td align="center">hospital</td>
+    <td align="center">police</td>
+    <td align="center">food_court</td>
+    <td align="center">grave_yard</td>
     <td align="center">toilets</td>
     <td align="center">pharmacy</td>
-    <td align="center">post_box</td>
-    <td align="center">parking</td>
-    <td align="center">cafe</td>
-  </tr>
+   
   <tr>
-    <td align="center">post_office</td>
-    <td align="center">food_court</td>
-    <td align="center">theatre</td>
-    <td align="center">taxi</td>
     <td align="center">ferry_terminal</td>
-    <td align="center">police</td>
+    <td align="center">fountain</td>
+    <td align="center">clock</td>
+    <td align="center">bicycle_rental</td>
+    <td align="center">library</td>
+    <td align="center">parking</td>
+    <td align="center">fire_station</td>
   </tr>
 </table>
+
+
 
 ## Methods of POI data use
 If we use python:
