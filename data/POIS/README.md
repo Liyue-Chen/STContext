@@ -97,6 +97,7 @@ From the graph, it can be seen that there are many types of POIs, but we only co
   </tr>
 </table>
 
+As can be seen in the above table, we consider a total of 35 POIs.So the shape of numpy in the pickle file is (Numnode,35).
 
 
 ## Methods of POI data use
