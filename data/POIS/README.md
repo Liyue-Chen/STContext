@@ -109,12 +109,16 @@ Dataset='Bike_DC'
 import pickle
 
 # Specify the file path.
-file_path = '{}-{}.xls'.format(Dataset,Time)
+file_path = '{}-{}.pkl'.format(Dataset,Time)
 
 # Load POI data.
 with open(file_path, 'rb') as f:
     data = pickle.load(f)  
 ```
+## Processing data from raw POI to pickle files.
+
+
+
 ## Scenedivide Dataset：
 
 
