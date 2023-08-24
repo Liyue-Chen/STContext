@@ -200,7 +200,7 @@ def compute_distance(lat1, lon1, lat2, lon2):
     c = 2 * asin(sqrt(a))
     r = 6371
     distance = c * r * 1000
-    if (distance > Coverage):
+    if (distance > R):
         return False
     return True
 def processed(city_type,Time):
