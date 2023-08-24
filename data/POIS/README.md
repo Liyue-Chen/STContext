@@ -27,16 +27,16 @@ The above is the distribution map of POI in the Pedestrian Melbourne dataset.
 
 ## Folder:PROCESSED POI is the pre-processed POI data.(The format is pkl files)
 
-When using POI data, for ease of use, we process the Excel file into a pickle file for easy loading. The pickle file stores a two-dimensional numpy array with the dimension of (Numnode, POI_type), where Numnode represents the number of sites and POI_Type is the number of POI types we are considering. The value of a site indicates the number of POIs of that kind within a radius of N meters.
+When using POI data, for ease of use, we process the Excel file into a pickle file for easy loading. The pickle file stores a two-dimensional numpy array with the dimension of (Numnode, POI_type), where Numnode represents the number of sites and POI_Type is the number of POI types we are considering. The value of a site indicates the number of POIs of that kind within a radius of "R" meters.
 
-N represents the site coverage.
+"R" represents the site coverage.
 
-Since the size of the area covered by the dataset is different, the value of N is also different,The following table shows the values of N in different datasets.
-N as a parameter can be set to different values to generate different pickle files.
+Since the size of the area covered by the dataset is different, the value of "R" is also different,The following table shows the values of "R" in different datasets.
+"R" as a parameter can be set to different values to generate different pickle files.
 
 |  | Bike_NYC | Bike_DC | Bike_Chicago | Pedestrian_Melbourne |
 |:--------:|:--------:|:--------:|:--------:|:--------:|
-| N(m)  | 500   | 350   | 350   | 130   |
+| R(m)  | 500   | 350   | 350   | 130   |
 
 
 
@@ -44,6 +44,40 @@ N as a parameter can be set to different values to generate different pickle fil
 From the graph, it can be seen that there are many types of POIs, but we only consider some important POIs when using them specifically.For each dataset, we selecte some important POIs. And we take the union of these POIs to get the final important POIs.
 
 ### Final Important POIs：
+
+
+There are two steps to calculating significant POIs for each year.
+
+Step 1: Calculate the  scores of the POIs and select the POIs with the top 25 values.The score for calculating the POI can be formulated as follows:
+
+$$Score_j=\sum_{i}^n N_{ij} \times f_i $$
+
+Where n denotes the number of nodes, "i" denotes the region number, "j" denotes the jth POI,N_{ij} denotes the number of jth POI around the site "i", and "f_i" denotes the average of the ith site's traffic flow of  in the dataset.
+
+Then the top 25 POIs with the highest Score are selected.
+
+
+
+Step 2: Remove some strongly correlated POIs based on correlation and prior knowledge.
+
+First, for any two POIs (X,Y),the distribution of them at n sites can be summarized separately by the sequences {x_1,x_2,x_3.... .x_i}, {y_1,y_2,y_3.... .y_i}.If data X and data Y have strong correlation (Pearson's correlation coefficient is greater than 0.8), we consider that the  correlations of them are strong, and get the combination of POIs with strong correlation.
+
+Next, for the POI combination with strong correlation, we further judge by a priori knowledge whether they are similar POI types and need to be removed.For example,
+|      | (x1,y1)     | (x2,y2)      | (x3,y3)      |(x4,y4)      |
+| :--------: | :--------: | :--------: | :--------: |:--------: |
+| X   | bank   | bar   | theatre   | car_sharing|
+| Y   | atm   | drinking water   | cinema   |car_rental|
+
+
+Some combinations like the above, we just need to retain one of them and remove the POI with smaller score.
+
+Through the above two steps of POIs, we get important POIs in a year .  Then ,We count a union about the important POIs in each year of the dataset as the dataset's important POIs. Finally, we count a union about the important POIs in all datasets to get the final important POIs.
+
+
+The final important POIs are listed below
+
+
+
 
 
 <table>
@@ -99,31 +133,15 @@ From the graph, it can be seen that there are many types of POIs, but we only co
 
 As can be seen in the above table, we consider a total of 35 POIs.So the shape of numpy in the pickle file is (Numnode,35).
 
-
-## Methods of POI data use
-If we use python:
-```Python
-#Specify the data set and the corresponding time.
-Time='2013-01-01'
-Dataset='Bike_DC'
-import pickle
-
-# Specify the file path.
-file_path = '{}-{}.pkl'.format(Dataset,Time)
-
-# Load POI data.
-with open(file_path, 'rb') as f:
-    data = pickle.load(f)  
-```
 ## Processing data from raw POI to pickle files.
+After setting "City", "Dataset_path", "N", "RAWPOI_path","Time_begin" and "Time_end" and "POI_type_file_path" parameters, run the following code directly.
+
 ```Python
 from abc import ABC, abstractmethod
 from math import radians, cos, sin, asin, sqrt
 import pandas as pd
 import pickle
 import numpy as np
-from process import compute_distance
-from process import processed
 
 #Dataset_name,eg:Bike_DC,Bike_NYC.
 City='Pedestrian_Melbourne'
@@ -137,13 +155,56 @@ RAWPOI_path="C:\\Users\\tf20\\Desktop\\code\\processed_code\\RAWPOI\\Pedestrian_
 #Important POI type is  stored in POI_type_file_path.
 POI_type_file_path='test_store.pkl'
 
-#"N" meters around the Node is considered as POIs around the site.
-N=130
+#"R" meters around the Node is considered as POIs around the site.
+R=130
 
 #Here is the time span, e.g. 2013 to 2017,then Time_begin=2013,Time_end=2017
 Time_begin=2021
 Time_end=2022
 
+def compute_distance(lat1, lon1, lat2, lon2):
+    """
+    Calculate the great circle distance between two points
+    on the earth (specified in decimal degrees)
+    """
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+    # haversine
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * asin(sqrt(a))
+    r = 6371
+    distance = c * r * 1000
+    if (distance > Coverage):
+        return False
+    return True
+def processed(city_type,Time):
+
+    str1="{}\\{}.pkl".format(Dataset_path,city_type)
+    Poi_exc="{}\\{}-{}.xls".format(RAWPOI_path,city_type,Time)
+    with open(str1, "rb") as fp:
+        Bikedata = pickle.load(fp)
+    data = pd.read_excel(Poi_exc)  
+    dict={Important_poi_list[i]:i for i in range(len(Important_poi_list)) }
+    # dict is a dictionary mapping {poi name: serial number}
+
+    NodeGeoLa = [item[2] for item in Bikedata['Node']['StationInfo']]
+    NodeGeoIn = [item[3] for item in Bikedata['Node']['StationInfo']]
+    # NodeGeoLa,NodeGeoIn are latitude and longitude coordinates of the dataset site
+
+    #data stores  the relative POI data, while Bikedata stores node information of the dataset.
+    poi_num=len(Important_poi_list)
+    poi_set= set(Important_poi_list)
+    poi=np.zeros((len(Bikedata['Node']['TrafficNode'][0]), poi_num))
+
+    for _ in range (len(NodeGeoIn)):
+        for j in range(len(data)):
+            if (data.loc[j]['fclass'] not in poi_set ):
+                continue
+            In, la = data.loc[j]['lon'],data.loc[j]['lat']
+            if(compute_distance(float(la),float(In),float(NodeGeoLa[_]),float(NodeGeoIn[_]))):
+                poi[_][dict[data.loc[j]['fclass']]]=poi[_][dict[data.loc[j]['fclass']]]+1
+    return poi
 
 #Load list of the important POI type.
 with open(POI_type_file_path, 'rb') as f:
@@ -152,10 +213,27 @@ with open(POI_type_file_path, 'rb') as f:
 for i in range(int(Time_begin),int(Time_end)+1):
     Time_='{}-01-01'.format(i)
     a=processed(City,Time_)
-    with open('{}_{}_Coverage={}.pkl'.format(City, Time_,N), 'wb') as f:
+    with open('{}_{}_R=={}.pkl'.format(City, Time_,R), 'wb') as f:
         pickle.dump(a, f)
 ```
 
+
+## How to use POI pickle file.
+If we use python:
+```Python
+#Specify the data set and the corresponding time.
+Time='2013-01-01'
+City='Bike_DC'
+R='130'
+import pickle
+
+# Specify the file path.
+file_path = '{}_{}_R=={}.pkl'.format(City,Time,R)
+
+# Load POI data.
+with open(file_path, 'rb') as f:
+    data = pickle.load(f)  
+```
 
 ## Scenedivide Dataset：
 
