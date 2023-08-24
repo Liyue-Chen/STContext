@@ -1,10 +1,9 @@
-## Document Description：
-POIS:The six folders named after cities contain POI data for each of the six cities.
+# Document Description：
+The  folders  contain POI data for four cities and relative code.
 
 
-## Data Dictionary：
 
-## Folder:RAWPOI is the raw acquisition of POI data.
+# Folder:RAWPOI is the raw acquisition of POI data.
   
   Each folder for the current city's POI file: file naming: "city - year - month - day.xls" (representing the current number and type of POI summary for this day under this city.eg:Bike_Chicago-2013-01-01.xls).
 
@@ -25,7 +24,7 @@ The above is the distribution map of POI in the Pedestrian Melbourne dataset.
 
    
 
-## Folder:PROCESSED POI is the pre-processed POI data.(The format is pkl files)
+# Folder:PROCESSED POI is the pre-processed POI data.(The format is pkl files)
 
 When using POI data, for ease of use, we process the Excel file into a pickle file for easy loading. The pickle file stores a two-dimensional numpy array with the dimension of (Numnode, POI_type), where Numnode represents the number of sites and POI_Type is the number of POI types we are considering. The value of a site indicates the number of POIs of that kind within a radius of "R" meters.
 
@@ -43,26 +42,52 @@ Since the size of the area covered by the dataset is different, the value of "R"
 
 From the graph, it can be seen that there are many types of POIs, but we only consider some important POIs when using them specifically.For each dataset, we selecte some important POIs. And we take the union of these POIs to get the final important POIs.
 
-### Final Important POIs：
+## Final Important POIs：
 
 
 There are two steps to calculating significant POIs for each year.
 
-Step 1: Calculate the  scores of the POIs and select the POIs with the top 25 values.The score for calculating the POI can be formulated as follows:
+### Step 1: Calculate the  scores of the POIs and select the POIs with the top 25 values.
+
+The score for calculating the POI can be formulated as follows:
 
 $$Score_j=\sum_{i}^n N_{ij} \times f_i $$
 
-Where n denotes the number of nodes, "i" denotes the region number, "j" denotes the jth POI,N_{ij} denotes the number of jth POI around the site "i", and "f_i" denotes the average of the ith site's traffic flow of  in the dataset.
+Where n denotes the number of nodes, 
+$i$
+denotes the region number, 
+$j$
+denotes the 
+$j$
+th POI,
+$N_{ij}$
+denotes the number of 
+$j$
+th POI around the site 
+$i$
+, and 
+$f_i$
+denotes the average of the 
+$i$
+th site's traffic flow of  in the dataset.
 
-Then the top 25 POIs with the highest Score are selected.
+Then the top 25 POIs with the highest score are selected.
 
 
 
-Step 2: Remove some strongly correlated POIs based on correlation and prior knowledge.
+### Step 2: Remove some strongly correlated POIs based on correlation and prior knowledge.
 
-First, for any two POIs (X,Y),the distribution of them at n sites can be summarized separately by the sequences {x_1,x_2,x_3.... .x_i}, {y_1,y_2,y_3.... .y_i}.If data X and data Y have strong correlation (Pearson's correlation coefficient is greater than 0.8), we consider that the  correlations of them are strong, and get the combination of POIs with strong correlation.
+First, for any two POIs (X,Y),the distribution of them at n sites can be summarized separately by the sequences 
+\{
+$​​x_1,x_2,x_3.... .x_i$
+\}
+,
+\{
+$y_1,y_2,y_3.... .y_i$
+\}
+.If  X and  Y have strong correlation (Pearson's correlation coefficient is greater than 0.8), we consider that the  correlations of them are strong, and get the combination of POI with strong correlation.
 
-Next, for the POI combination with strong correlation, we further judge by a priori knowledge whether they are similar POI types and need to be removed.For example,
+Next, for the POI combination with strong correlation, we further judge by a priori knowledge whether they are similar POI types and need to be removed.There are some examples as follows:
 |      | (x1,y1)     | (x2,y2)      | (x3,y3)      |(x4,y4)      |
 | :--------: | :--------: | :--------: | :--------: |:--------: |
 | X   | bank   | bar   | theatre   | car_sharing|
@@ -71,7 +96,7 @@ Next, for the POI combination with strong correlation, we further judge by a pri
 
 Some combinations like the above, we just need to retain one of them and remove the POI with smaller score.
 
-Through the above two steps of POIs, we get important POIs in a year .  Then ,We count a union about the important POIs in each year of the dataset as the dataset's important POIs. Finally, we count a union about the important POIs in all datasets to get the final important POIs.
+Through the above two steps of POIs, we get important POIs in a year of the dataset.  Then ,We count a union about the important POIs in each year of the dataset as the dataset's important POIs. Finally, we count a union about the important POIs in all datasets to get the final important POIs.
 
 
 The final important POIs are listed below
