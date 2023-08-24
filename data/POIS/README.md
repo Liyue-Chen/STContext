@@ -116,7 +116,45 @@ with open(file_path, 'rb') as f:
     data = pickle.load(f)  
 ```
 ## Processing data from raw POI to pickle files.
+```Python
+from abc import ABC, abstractmethod
+from math import radians, cos, sin, asin, sqrt
+import pandas as pd
+import pickle
+import numpy as np
+from process import compute_distance
+from process import processed
 
+#Dataset_name,eg:Bike_DC,Bike_NYC.
+City='Pedestrian_Melbourne'
+
+#The folder where the "City" dataset pkl file is located.eg: Bike_NYC.pkl is located in Dataset_path.
+Dataset_path="C:\\Users\\tf20\\Desktop\\DC\\新建文件夹\\code\\processed_code"
+
+#The folder where RawPOI files are located.eg: Pedestrian_Melbourne-2022-01-01.xls is located in Dataset_path.
+RAWPOI_path="C:\\Users\\tf20\\Desktop\\code\\processed_code\\RAWPOI\\Pedestrian_Melbourne"
+
+#Important POI type is  stored in POI_type_file_path.
+POI_type_file_path='test_store.pkl'
+
+#"N" meters around the Node is considered as POIs around the site.
+N=130
+
+#Here is the time span, e.g. 2013 to 2017,then Time_begin=2013,Time_end=2017
+Time_begin=2021
+Time_end=2022
+
+
+#Load list of the important POI type.
+with open(POI_type_file_path, 'rb') as f:
+    Important_poi_list=pickle.load(f)
+
+for i in range(int(Time_begin),int(Time_end)+1):
+    Time_='{}-01-01'.format(i)
+    a=processed(City,Time_)
+    with open('{}_{}_Coverage={}.pkl'.format(City, Time_,N), 'wb') as f:
+        pickle.dump(a, f)
+```
 
 
 ## Scenedivide Dataset：
