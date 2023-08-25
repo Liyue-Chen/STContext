@@ -40,9 +40,9 @@ Since the size of the area covered by the dataset is different, the value of "R"
 
 
 
-From the graph, it can be seen that there are many types of POIs, but we only consider some important POIs when using them specifically.For each dataset, we selecte some important POIs. And we take the union of these POIs to get the final important POIs.
+From the graph, it can be seen that there are many types of POIs, but we only consider some significant POIs when using them specifically.For each dataset, we selecte some significant POIs. And we take the union of these POIs to get the final significant POIs.
 
-## Final Important POIs：
+## Final significant POIs：
 
 
 There are two steps to calculating significant POIs for each year.
@@ -96,10 +96,15 @@ Next, for the POI combination with strong correlation, we further judge by a pri
 
 Some combinations like the above, we just need to retain one of them and remove the POI with smaller score.
 
-Through the above two steps of POIs, we get important POIs in a year of the dataset.  Then ,We count a union about the important POIs in each year of the dataset as the dataset's important POIs. Finally, we count a union about the important POIs in all datasets to get the final important POIs.
+Through the above two steps of POIs, we get significant POIs in a year of the dataset.  Then ,We count a union about the significant POIs in each year of the dataset as the dataset's significant POIs. Finally, we count a union about the significant POIs in all datasets to get the final significant POIs.
+
+<img src="https://github.com/Liyue-Chen/HeteContext/blob/main/data/POIS/Preprocess_code/comparepicture.png" width = "320" height = "240" alt="Chicago_heat" align=center />
+
+The figure above shows a comparison of the number of significant POI types and the number of raw POI types.
 
 
-The final important POIs are listed below
+
+The final significant POIs are listed below:
 
 
 
@@ -107,7 +112,7 @@ The final important POIs are listed below
 
 <table>
   <tr>
-    <th colspan="7" style="text-align:center;">Important POI List</th>
+    <th colspan="7" style="text-align:center;">significant POI List</th>
   </tr>
   <tr>
     <td align="center">fast_food</td>
@@ -177,7 +182,7 @@ Dataset_path="C:\\Users\\tf20\\Desktop\\DC\\新建文件夹\\code\\processed_cod
 #The folder where RawPOI files are located.eg: Pedestrian_Melbourne-2022-01-01.xls is located in Dataset_path.
 RAWPOI_path="C:\\Users\\tf20\\Desktop\\code\\processed_code\\RAWPOI\\Pedestrian_Melbourne"
 
-#Important POI type is  stored in POI_type_file_path.
+#significant POI type is  stored in POI_type_file_path.
 POI_type_file_path='test_store.pkl'
 
 #"R" meters around the Node is considered as POIs around the site.
