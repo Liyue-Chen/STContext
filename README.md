@@ -42,7 +42,14 @@
 
 ## 天气数据集情况
 
-
+|                            **City**                             |     **Time Span**     |                **Data Link**                |               **Anlysis**               |
+| :-------------------------------------------------------------: | :-------------------: | :-----------------------------------------: | :-------------------------------------: |
+| [NYC](https://www.wunderground.com/weather/us/ny/new-york-city) | 2013/07/01-2017/09/30 |    [8.09M](data/Weather/NYC_Weather.csv)    |    [Source](analysis/NYC_Weather.md)    |
+|  [Chicago](https://www.wunderground.com/weather/us/il/chicago)  | 2013/07/01-2017/09/30 |  [7.94M](data/Weather/Chicago_Weather.csv)  |  [Source](analysis/Chicago_Weather.md)  |
+|   [DC](https://www.wunderground.com/weather/us/dc/washington)   | 2013/07/01-2017/09/30 |    [8.82M](data/Weather/DC_Weather.csv)     |    [Source](analysis/DC_weather.md)     |
+| [Melbourne](https://www.wunderground.com/weather/au/melbourne)  | 2009/05/01-2022/03/31 | [5.99M](data/Weather/Melbourne_Weather.csv) | [Source](analysis/Melbourne_Weather.md) |
+|  [LA](https://www.wunderground.com/weather/us/ca/los-angeles)   | 2012/03/01-2012/06/28 |    [0.51M](data/Weather/LA_Weather.csv)     |    [Source](analysis/LA_Weather.md)     |
+|   [BAY](https://www.wunderground.com/weather/us/mi/bay-city)    | 2017/01/01-2017/07/01 |    [0.84M](data/Weather/BAY_Weather.csv)    |    [Source](analysis/BAY_Weather.md)    |
 
 ## 节假日数据集情况
 
