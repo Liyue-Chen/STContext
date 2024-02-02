@@ -35,7 +35,7 @@
 |   bike-sharing   |    NYC    |    5 mins    | 2013/07/01-2017/09/30 |
 |   bike-sharing   |  Chicago  |    5 mins    | 2013/07/01-2017/09/30 |
 |   bike-sharing   |    DC     |    5 mins    | 2013/07/01-2017/09/30 |
-| pedestrian count | Melbourne |   60 mins    | 2009/05/01-2022/03/31 |
+| pedestrian count | Melbourne |   60 mins    | 2021/01/01-2022/11/01 |
 |  vehicle speed   |    LA     |    5 mins    | 2012/03/01-2012/06/28 |
 |  vehicle speed   |    BAY    |    5 mins    | 2017/01/01-2017/07/01 |
 |   ride-sharing   |  Chicago  |   60 mins    | 2013/01/01-2022/03/31 |
