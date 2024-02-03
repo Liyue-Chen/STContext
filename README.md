@@ -42,6 +42,29 @@
 
 ## 天气数据集情况
 
+### 预测天气数据收集情况
+
+- 温度
+	- 温度 (Temperature) √
+	- 最高温度 (Maximum temperature) ×
+	- 最低温度 (Minimum temperature) ×
+	- 露点温度 (Dewpoint temperature) √ 
+- 湿度
+	- 相对湿度 (Relative humidity) √
+	- 比湿度 (Specific humidity) √
+- 能见度 (Visibility) √
+- 风速 (Wind speed (gust)) √
+- 风角度
+	- 风的 v 分量 (v-component of wind) √
+	- 风的 u 分量 (u-component of wind) √
+- 空气质量 ×
+- 天气状态 ×
+- 云层厚度
+	- 总云量 (Total cloud cover) √
+	- 高云量 (High cloud cover)  ×
+	- 中云量 (Medium cloud cover)  ×
+	- 低云量 (Low cloud cover)  ×
+- 风寒指数 ×
 
 
 ## 节假日数据集情况
