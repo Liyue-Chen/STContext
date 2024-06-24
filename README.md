@@ -4,7 +4,7 @@
 
 ```bash
 ├── README.md
-├── Analysis Code
+├── AnalysisCode
 ├── Data
 │   ├── AQI
 │   ├── Administrative_Division
@@ -18,7 +18,7 @@
 ├── Experiments
 ├── img
 ├── UCTB
-└── Data_Process_Code
+└── DataProcessCode
 ```
 
 - The `Data` directory is designated for storing spatiotemporal data and context data, including subfolders such as `Holiday`, `POI`, and `Weather`. The files within these subfolders should be named using the format `City+TimeSpan+DataType.csv`, for example, `NYC_20160101_20170101_Weather.csv`. Among these, `Traffic_Data` is our dataset containing spatiotemporal traffic data.
@@ -70,17 +70,54 @@ The metadata table is displayed as a table. You can use the following two exampl
 | Type      | The type of a sensor                          | Mainline                              |
 | Direction | The direction of the highway                  | N, S, E, W                            |
 
-| Attribute      | Description                                                  | Example                                                      |
-| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Order ID       | Unique identifier for each sales order                       | 10013, 10014                                                 |
-| Date           | Date of the sales transaction                                | 2024-01-04                                                   |
-| Category       | Broad category of the product sold                           | Electronics, Home Appliances, Clothing, Books, Beauty Products, Sports |
-| Product Name   | Specific name or model of the product sold                   | iPhone 14 Pro, Dyson V11 Vacuum                              |
-| Quantity       | Number of units of the product sold in the transaction       | 1, 5                                                         |
-| Unit Price     | Price of one unit of the product                             | 999 dollars                                                  |
-| Total Price    | Total revenue generated from the sales transaction (Quantity * Unit Price). | 63.96                                                        |
-| Region         | Geographic region where the transaction occurred (e.g., North America, Europe, Asia) | North America, Europe, Asia                                  |
-| Payment Method | Method used for payment                                      | Credit Card, PayPal, Debit Card                              |
+| Attribute      | Description                                                                          | Example                                                                |
+| -------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| Order ID       | Unique identifier for each sales order                                               | 10013, 10014                                                           |
+| Date           | Date of the sales transaction                                                        | 2024-01-04                                                             |
+| Category       | Broad category of the product sold                                                   | Electronics, Home Appliances, Clothing, Books, Beauty Products, Sports |
+| Product Name   | Specific name or model of the product sold                                           | iPhone 14 Pro, Dyson V11 Vacuum                                        |
+| Quantity       | Number of units of the product sold in the transaction                               | 1, 5                                                                   |
+| Unit Price     | Price of one unit of the product                                                     | 999 dollars                                                            |
+| Total Price    | Total revenue generated from the sales transaction (Quantity * Unit Price).          | 63.96                                                                  |
+| Region         | Geographic region where the transaction occurred (e.g., North America, Europe, Asia) | North America, Europe, Asia                                            |
+| Payment Method | Method used for payment                                                              | Credit Card, PayPal, Debit Card                                        |
+
+
+**Historical Weather**
+
+| Attribute       | Description                                                      | Example                                           |
+| --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| key             | Unique identifier of the observing site                          | KSJC,KLGA                                         |
+| class           | Type of observation                                              | observation                                       |
+| expire_time_gmt | Expiration time of the observation                               | 2017-01-01 03:53:00                               |
+| obs_id          | Observation ID                                                   | KSJC                                              |
+| obs_name        | Name of the observing site                                       | San Jose                                          |
+| valid_time_gmt  | Observation validity period                                      | 2017-01-01 00:53:00                               |
+| day_ind         | Time of day (day or night)                                       | D,N                                               |
+| temp            | Temperature (Fahrenheit)                                         | -14-118                                           |
+| wx_icon         | Weather Icon Code                                                | 0-33                                              |
+| icon_extd       | Weather Icon Extension Code                                      | 3300                                              |
+| wx_phrase       | Weather phrase description                                       | Fair, Mostly Cloudy,Light Rain                    |
+| pressure_tend   | Air pressure trend                                               | 0(stable),1(increase),2(decrease)                 |
+| pressure_desc   | Discription of air pressure trend                                | Rising Rapidly                                    |
+| dewPt           | Dew Point Temperature (Fahrenheit)                               | -24-80                                            |
+| heat_index      | Heat Index                                                       | -14-114                                           |
+| rh              | Relative humidity(%)                                             | 0-100                                             |
+| pressure        | pressure                                                         | 28-31                                             |
+| vis             | Visibility (miles)                                               | 0-10                                              |
+| wc              | Wind Chill Index                                                 | -41~118                                           |
+| wdir            | Wind direction (angle)                                           | 10-360                                            |
+| wdir_cardinal   | Description of wind direction                                    | NE,S,N                                            |
+| gust            | Wind speed instantaneous value (miles per hour)                  | 16-74                                             |
+| wspd            | Wind Speed ​​(mph)                                                 | 0-60                                              |
+| max_temp        | Maximum Temperature (Fahrenheit)                                 | -12-118                                           |
+| min_temp        | Minimum Temperature (Fahrenheit)                                 | -15-94                                            |
+| precip_total    | Total precipitation (inches)                                     | 0-4.88                                            |
+| precip_hrly     | Hourly precipitation (inches)                                    | 0-1.98                                            |
+| snow_hrly       | Hourly precipitation (inches)                                    | 1.0-3.0                                           |
+| uv_desc         | UV Index Description                                             | 'Low', 'Moderate', 'High', 'Very High', 'Extreme' |
+| feels_like      | Feeling temperature (Fahrenheit)                                 | -41-114                                           |
+| uv_index        | [UV Index](https://www.epa.gov/sunsafety/calculating-uv-index-0) | -618-12                                           |
 
 
 
@@ -100,16 +137,6 @@ This section provides an overview of the steps for preparing and organizing cont
 
 
 ## Historical Weather
-
-> 文件与文件夹说明：
-> - preprocessed: 预处理后的数据
-> - raw: 仅将时间戳调整为不同地区的时间的几乎原始的数据, 该文件夹下的数据为，爬取到后仅将时间戳处理为当地的时间，所得到的数据
-> - statistics: 统计与分析
-> - scene: 选取的场景，其中包含多个csv
-> - preprocess: 读取数据的代码
-> - ipynb文件为代码文件，目前主要为爬取和数据分析的代码，其中有较多注释
-> - context_feature_trans.py和特征工程有关
-
 
 数据字典，目前为中文，以方便查看，后续会翻译成英文
 - key: 观测站点的唯一标识符 - (str)
@@ -241,9 +268,9 @@ When using POI data, for ease of use, we process the Excel file into a pickle fi
 Since the size of the area covered by the dataset is different, the value of "R" is also different,The following table shows the values of "R" in different datasets.
 "R" as a parameter can be set to different values to generate different pickle files.
 
-|      | Bike_NYC | Bike_DC | Bike_Chicago | Pedestrian_Melbourne |
-| :--: | :------: | :-----: | :----------: | :------------------: |
-| R(m) |   500    |   350   |     350      |         130          |
+|       | Bike_NYC | Bike_DC | Bike_Chicago | Pedestrian_Melbourne |
+| :---: | :------: | :-----: | :----------: | :------------------: |
+| R(m)  |   500    |   350   |     350      |         130          |
 
 
 
@@ -296,10 +323,10 @@ $y_1,y_2,y_3.... .y_i$
 .If  X and  Y have strong correlation (Pearson's correlation coefficient is greater than 0.8), we consider that the  correlations of them are strong, and get the combination of POI with strong correlation.
 
 Next, for the POI combination with strong correlation, we further judge by a priori knowledge whether they are similar POI types and need to be removed.There are some examples as follows:
-|      | (x1,y1) |    (x2,y2)     | (x3,y3) |   (x4,y4)   |
-| :--: | :-----: | :------------: | :-----: | :---------: |
-|  X   |  bank   |      bar       | theatre | car_sharing |
-|  Y   |   atm   | drinking water | cinema  | car_rental  |
+|       | (x1,y1) |    (x2,y2)     | (x3,y3) |   (x4,y4)   |
+| :---: | :-----: | :------------: | :-----: | :---------: |
+|   X   |  bank   |      bar       | theatre | car_sharing |
+|   Y   |   atm   | drinking water | cinema  | car_rental  |
 
 
 Some combinations like the above, we just need to retain one of them and remove the POI with smaller score.
