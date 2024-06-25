@@ -120,6 +120,23 @@ The metadata table is displayed as a table. You can use the following two exampl
 | uv_index        | [UV Index](https://www.epa.gov/sunsafety/calculating-uv-index-0) | -618-12                                           |
 
 
+**Weather Forecast**
+
+| Attribute | Description                                                     | Example        |
+| --------- | --------------------------------------------------------------- | -------------- |
+| u10       | 10m_u_component_of_wind (metre per second)                      | -3.2, 5.1      |
+| v10       | 10m_v_component_of_wind (metre per second)                      | 4.8, -1.6      |
+| fg10      | 10m_wind_gust_since_previous_post_processing (metre per second) | 7.3, 12.1      |
+| d2m       | 2m_dewpoint_temperature (kelvin)                                | 280.15, 290.55 |
+| t2m       | 2m_temperature (kelvin)                                         | 285.65, 300.25 |
+| i10fg     | instantaneous_10m_wind_gust (metre per second)                  | 10.5, 15.3     |
+| mx2t      | maximum_2m_temperature_since_previous_post_processing (kelvin)  | 295.75, 310.85 |
+| mn2t      | minimum_2m_temperature_since_previous_post_processing (kelvin)  | 275.35, 283.15 |
+| sd        | snow_depth (metres of water equivalent)                         | 0.12, 0.25     |
+| sf        | snowfall (metres of water equivalent)                           | 0.05, 0.10     |
+| tcc       | total_cloud_cover (Dimensionless)                               | 0.7, 1.0       |
+| tp        | total_precipitation (metres)                                    | 0.02, 0.08     |
+
 
 ### Load and Use
 
