@@ -81,10 +81,7 @@ class DataSet(object):
                 self.data['Node']['TrafficNode'] = self.merge_data(self.data['Node']['TrafficNode'], "node")
             if len(self.data['Grid']['TrafficGrid']) > 0:
                 self.data['Grid']['TrafficGrid'] = self.merge_data(self.data['Grid']['TrafficGrid'], "grid")
-            if len(self.data['ExternalFeature']['Weather']) > 0:
-                self.data['ExternalFeature']['Weather'] = self.merge_data(self.data['ExternalFeature']['Weather'],
-                                                                          "node")
-
+            
         self.time_range = self.data['TimeRange']
         self.time_fitness = self.data['TimeFitness']
 
@@ -94,8 +91,6 @@ class DataSet(object):
 
         self.grid_traffic = self.data['Grid']['TrafficGrid']
         self.grid_lat_lng = self.data['Grid']['GridLatLng']
-
-        self.external_feature_weather = self.data['ExternalFeature']['Weather']
 
     def merge_data(self, data, dataType):
         if self.MergeWay == "sum":

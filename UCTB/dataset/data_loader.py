@@ -1,11 +1,10 @@
 import os
 import copy
-import datetime
 import numpy as np
+import datetime
 from dateutil.parser import parse
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.stats import pearsonr
-from ..preprocess.time_utils import is_work_day_china, is_work_day_america, is_valid_date
 from ..preprocess import MoveSample, SplitData, ST_MoveSample, chooseNormalizer
 from .dataset import DataSet
 from ..preprocess.preprocessor import *
@@ -23,7 +22,6 @@ class GridTrafficLoader(object):
                  trend_len=4,
                  target_length=1,
                  normalize=True,
-                 workday_parser=is_work_day_america,
                  data_dir=None,
                  MergeIndex=1,
                  MergeWay="sum",**kwargs):
@@ -41,29 +39,7 @@ class GridTrafficLoader(object):
         else:
             data_range = [int(data_range[0] * self.daily_slots), int(data_range[1] * self.daily_slots)]
 
-        num_time_slots = data_range[1] - data_range[0]
         self.traffic_data = self.dataset.grid_traffic[data_range[0]:data_range[1], :].astype(np.float32)
-
-        # external feature
-        external_feature = []
-        # weather
-        if len(self.dataset.external_feature_weather) > 0:
-            external_feature.append(self.dataset.external_feature_weather[data_range[0]:data_range[1]])
-            # Weekday Feature
-            weekday_feature = [[1 if workday_parser(parse(self.dataset.time_range[0])
-                                                    + datetime.timedelta(hours=e * self.dataset.time_fitness / 60), self.dataset.city) else 0] \
-                            for e in range(data_range[0], num_time_slots + data_range[0])]
-            # Hour Feature
-            hour_feature = [[(parse(self.dataset.time_range[0]) +
-                            datetime.timedelta(hours=e * self.dataset.time_fitness / 60)).hour / 24.0]
-                            for e in range(data_range[0], num_time_slots + data_range[0])]
-
-            external_feature.append(weekday_feature)
-            external_feature.append(hour_feature)
-            external_feature = np.concatenate(external_feature, axis=-1).astype(np.float32)
-            self.external_dim = external_feature.shape[1]
-        else:
-            self.external_dim = len(external_feature)
 
         self.height, self.width = self.traffic_data.shape[1], self.traffic_data.shape[2]
 
@@ -72,25 +48,22 @@ class GridTrafficLoader(object):
         train_test_ratio = [1 - test_ratio, test_ratio]
 
         self.train_data, self.test_data = SplitData.split_data(self.traffic_data, train_test_ratio)
-        self.train_ef, self.test_ef = SplitData.split_data(external_feature, train_test_ratio)
-
+        
+        if train_data_length.lower() != 'all':
+            train_day_length = int(train_data_length)
+            self.train_data = self.train_data[-int(train_day_length * self.daily_slots):]
+            
         # Normalize the traffic data
         if normalize:
             self.normalizer = chooseNormalizer(normalize,self.train_data)
             self.train_data = self.normalizer.transform(self.train_data)
             self.test_data = self.normalizer.transform(self.test_data)
 
-        if train_data_length.lower() != 'all':
-            train_day_length = int(train_data_length)
-            self.train_data = self.train_data[-int(train_day_length * self.daily_slots):]
-            self.train_ef = self.train_ef[-int(train_day_length * self.daily_slots):]
-
         # expand the test data
         expand_start_index = len(self.train_data) - max(int(self.daily_slots * period_len),
                                                         int(self.daily_slots * 7 * trend_len), closeness_len)
 
         self.test_data = np.vstack([self.train_data[expand_start_index:], self.test_data])
-        self.test_ef = np.vstack([self.train_ef[expand_start_index:], self.test_ef])
 
         assert type(closeness_len) is int and closeness_len >= 0
         assert type(period_len) is int and period_len >= 0
@@ -125,10 +98,6 @@ class GridTrafficLoader(object):
 
         self.train_sequence_len = max((len(self.train_closeness), len(self.train_period), len(self.train_trend)))
         self.test_sequence_len = max((len(self.test_closeness), len(self.test_period), len(self.test_trend)))
-
-        # external feature
-        self.train_ef = self.train_ef[-self.train_sequence_len - target_length: -target_length]
-        self.test_ef = self.test_ef[-self.test_sequence_len - target_length: -target_length]
 
 
 class NodeTrafficLoader(object):
@@ -176,6 +145,8 @@ class NodeTrafficLoader(object):
             and construction.
         train_y (np.ndarray): The train set data. Its shape is [train_time_slot_num, ``station_number``, 1].
             ``test_y`` has similar shape and construction.
+        train_data_timestamp (list): The timestamps of train set data. Its length is ``train_time_slot_num``.
+        test_data_timestamp (list): The timestamps of test set data. Its length is ``test_time_slot_num``.
     """
 
     def __init__(self,
@@ -189,7 +160,6 @@ class NodeTrafficLoader(object):
                  trend_len=4,
                  target_length=1,
                  normalize=True,
-                 workday_parser=is_work_day_america,
                  with_tpe=False,
                  data_dir=None,
                  MergeIndex=1,
@@ -221,61 +191,41 @@ class NodeTrafficLoader(object):
 
         num_time_slots = data_range[1] - data_range[0]
 
-        # traffic feature
+        # retrieve traffic data
+        self.traffic_data = self.dataset.node_traffic[data_range[0]:data_range[1], :].astype(np.float32)
         
+        # record timestamps of the traffic data
+        train_start_timestamp = parse(self.dataset.time_range[0])
+        self.traffic_data_timestamp = [train_start_timestamp + datetime.timedelta(minutes=offset*self.dataset.time_fitness) for offset in range(num_time_slots)]
 
-        self.traffic_data = self.dataset.node_traffic[data_range[0]:data_range[1], :].astype(
-             np.float32)
-
-        # external feature
-        external_feature = []
-        # weather
-        if len(self.dataset.external_feature_weather) > 0:
-            external_feature.append(self.dataset.external_feature_weather[data_range[0]:data_range[1]])
-            # Weekday Feature
-            weekday_feature = [[1 if workday_parser(parse(self.dataset.time_range[0])
-                                                    + datetime.timedelta(hours=e * self.dataset.time_fitness / 60), self.dataset.city) else 0] \
-                            for e in range(data_range[0], num_time_slots + data_range[0])]
-            # Hour Feature
-            hour_feature = [[(parse(self.dataset.time_range[0]) +
-                            datetime.timedelta(hours=e * self.dataset.time_fitness / 60)).hour / 24.0]
-                            for e in range(data_range[0], num_time_slots + data_range[0])]
-
-            external_feature.append(weekday_feature)
-            external_feature.append(hour_feature)
-            external_feature = np.concatenate(external_feature, axis=-1).astype(np.float32)
-            self.external_dim = external_feature.shape[1]
-        else:
-            self.external_dim = len(external_feature)
-        
-        
-        if test_ratio > 1 or test_ratio < 0:
-            raise ValueError('test_ratio ')
-        self.train_test_ratio = [1 - test_ratio, test_ratio]
-
-        self.train_data, self.test_data = SplitData.split_data(self.traffic_data, self.train_test_ratio)
+        # mask the stations whose average traffic is less than a given threshold
         if remove:
             self.traffic_data_index = np.where(np.mean(self.train_data, axis=0) * self.daily_slots > 1)[0]
         else:
             self.traffic_data_index = np.arange(self.dataset.node_traffic.shape[1])
-
         self.traffic_data = self.traffic_data[:, self.traffic_data_index]
-        self.train_data = self.train_data[:, self.traffic_data_index]
-        self.test_data = self.test_data[:, self.traffic_data_index]
+        
+        # record station information 
+        self.traffic_station_info = [self.dataset.node_station_info[i] for i in self.traffic_data_index]
         self.station_number = self.traffic_data.shape[1]
         
-        self.train_ef, self.test_ef = SplitData.split_data(external_feature, self.train_test_ratio)
-
-        # Normalize the traffic data
-
-        self.normalizer = chooseNormalizer(normalize,self.train_data)
-        self.train_data = self.normalizer.transform(self.train_data)
-        self.test_data = self.normalizer.transform(self.test_data)
+        # split train and test data
+        if test_ratio > 1 or test_ratio < 0:
+            raise ValueError('test_ratio ')
+        self.train_test_ratio = [1 - test_ratio, test_ratio]
+        self.train_data, self.test_data = SplitData.split_data(self.traffic_data, self.train_test_ratio)
+        self.train_data_timestamp, self.test_data_timestamp = SplitData.split_data(self.traffic_data_timestamp, self.train_test_ratio)
+        
 
         if train_data_length.lower() != 'all':
             train_day_length = int(train_data_length)
             self.train_data = self.train_data[-int(train_day_length * self.daily_slots):]
-            self.train_ef = self.train_ef[-int(train_day_length * self.daily_slots):]
+            self.train_data_timestamp = self.train_data_timestamp[-int(train_day_length * self.daily_slots):]
+
+        # Normalize the traffic data
+        self.normalizer = chooseNormalizer(normalize,self.train_data)
+        self.train_data = self.normalizer.transform(self.train_data)
+        self.test_data = self.normalizer.transform(self.test_data)
 
         # expand the test data
         expand_start_index = len(self.train_data) - \
@@ -283,8 +233,9 @@ class NodeTrafficLoader(object):
                                  int(self.daily_slots * 7 * self.trend_len),
                                  self.closeness_len)
 
+        # ST_MoveSample then removes the expanded test sequence, ensuring the sequence length is not reduced
         self.test_data = np.vstack([self.train_data[expand_start_index:], self.test_data])
-        self.test_ef = np.vstack([self.train_ef[expand_start_index:], self.test_ef])
+        self.test_data_timestamp = np.vstack([self.train_data_timestamp[expand_start_index:], self.test_data_timestamp])
 
         # init move sample obj
         self.st_move_sample = ST_MoveSample(closeness_len=self.closeness_len,
@@ -304,13 +255,13 @@ class NodeTrafficLoader(object):
         self.train_sequence_len = max((len(self.train_closeness), len(self.train_period), len(self.train_trend)))
         self.test_sequence_len = max((len(self.test_closeness), len(self.test_period), len(self.test_trend)))
 
-        # external feature
-        self.train_ef = self.train_ef[-self.train_sequence_len - target_length: -target_length]
-        self.test_ef = self.test_ef[-self.test_sequence_len - target_length: -target_length]
+        # align the time stamp
+        self.train_data_timestamp = self.train_data_timestamp[-self.train_sequence_len:]
+        self.test_data_timestamp = self.test_data_timestamp[-self.test_sequence_len:]
 
+
+        # Time Position Embedding
         if with_tpe:
-
-            # Time position embedding
             self.closeness_tpe = np.array(range(1, self.closeness_len + 1), dtype=np.float32)
             self.period_tpe = np.array(range(1 * int(self.daily_slots),
                                              self.period_len * int(self.daily_slots) + 1,
@@ -353,7 +304,6 @@ class NodeTrafficLoader(object):
         if self.dataset.node_station_info is None or len(self.dataset.node_station_info) == 0:
             raise ValueError('No station information found in dataset')
 
-        import numpy as np
         import plotly
         from plotly.graph_objs import Scattermapbox, Layout
 

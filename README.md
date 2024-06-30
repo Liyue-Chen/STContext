@@ -39,14 +39,27 @@
 
 | **Application**  | **City**  | **Interval** |     **Time Span**     |
 | :--------------: | :-------: | :----------: | :-------------------: |
-|   bike-sharing   |    NYC    |    5 mins    | 2013/07/01-2017/09/30 |
-|   bike-sharing   |  Chicago  |    5 mins    | 2013/07/01-2017/09/30 |
-|   bike-sharing   |    DC     |    5 mins    | 2013/07/01-2017/09/30 |
-| pedestrian count | Melbourne |   60 mins    | 2021/01/01-2022/11/01 |
-|  vehicle speed   |    LA     |    5 mins    | 2012/03/01-2012/06/28 |
-|  vehicle speed   |    BAY    |    5 mins    | 2017/01/01-2017/07/01 |
-|   ride-sharing   |  Chicago  |   60 mins    | 2013/01/01-2022/03/31 |
-|      Metro       |           |              |                       |
+|   Bike-sharing   |    NYC    |    5 mins    | 2013/07/01-2017/09/30 |
+|   Bike-sharing   |  Chicago  |    5 mins    | 2013/07/01-2017/09/30 |
+|   Bike-sharing   |    DC     |    5 mins    | 2013/07/01-2017/09/30 |
+| Pedestrian count | Melbourne |   60 mins    | 2021/01/01-2022/11/01 |
+|  Vehicle speed   |    LA     |    5 mins    | 2012/03/01-2012/06/28 |
+|  Vehicle speed   |    BAY    |    5 mins    | 2017/01/01-2017/07/01 |
+|   Ride-sharing   |  Chicago  |   60 mins    | 2013/01/01-2022/03/31 |
+|      Metro       |    NYC    |   60 mins    | 2022/02/01-2023/12/21 |
+
+## Dataset Overview
+
+|                      | Historical Wea. | Wea. Forecast | AQI  | Holiday |  TP  | POI  | Demo | Road |  AD  |
+| :------------------: | :-------------: | :-----------: | ---- | :-----: | :--: | :--: | :--: | :--: | :--: |
+|       Bike NYC       |        ✅        |               |      |         |      |      |      |      |      |
+|     Bike Chicago     |        ✅        |               |      |         |      |      |      |      |      |
+|       Bike DC        |        ✅        |               |      |         |      |      |      |      |      |
+| Pedestrian Melbourne |        ✅        |               |      |         |      |      |      |      |      |
+|       METR-LA        |        ✅        |               |      |         |      |      |      |      |      |
+|       PEMS-BAY       |        ✅        |               |      |         |      |      |      |      |      |
+|     Ride Chicago     |        ✅        |               |      |         |      |      |      |      |      |
+|      Metro NYC       |        ✅        |               |      |         |      |      |      |      |      |
 
 
 
@@ -401,7 +414,6 @@ The final significant POIs are listed below:
     <td align="center">grave_yard</td>
     <td align="center">toilets</td>
     <td align="center">pharmacy</td>
-
   <tr>
     <td align="center">ferry_terminal</td>
     <td align="center">fountain</td>
