@@ -116,7 +116,7 @@ This section provides an overview of the steps for preparing and organizing cont
 
 ## Historical Weather
 
-**Historical Weather**
+### Meta Data
 
 | Attribute       | Description                                                      | Example                                           |
 | --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
@@ -156,6 +156,8 @@ This section provides an overview of the steps for preparing and organizing cont
 
 ## Weather Forecast
 
+### Meta Data
+
 | Attribute | Description                                                     | Example        |
 | --------- | --------------------------------------------------------------- | -------------- |
 | u10       | 10m u component of wind (metre per second)                      | -3.2, 5.1      |
@@ -172,6 +174,8 @@ This section provides an overview of the steps for preparing and organizing cont
 | tp        | total precipitation (metres)                                    | 0.02, 0.08     |
 
 ## AQI
+
+### Meta Data
 
 | Attribute                                                                                                  | Description                                                                                                                         | Example                                           |
 | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
