@@ -23,9 +23,9 @@
 
 - The `Data` directory is designated for storing spatiotemporal data and context data, including subfolders such as `Holiday`, `POI`, and `Weather`. The files within these subfolders should be named using the format `City+TimeSpan+DataType.csv`, for example, `NYC_20160101_20170101_Weather.csv`. Among these, `Traffic_Data` is our dataset containing spatiotemporal traffic data.
 
-- The `Analysis_Code` directory is intended for storing the code or notebook files used for data analysis. The file names should reflect the purpose of the file. For instance, the code for analyzing the correlation between POI and traffic flow can be named `POI_correlation_analysis.py`.
+- The `AnalysisCode` directory is intended for storing the code or notebook files used for data analysis. The file names should reflect the purpose of the file. For instance, the code for analyzing the correlation between POI and traffic flow can be named `POI_correlation_analysis.py`.
 
-- The `Data_Process_Code` directory is used for storing data preprocessing code. The files can be named according to the type of data being processed. For example, the code for processing POI data can be named `POI_processing.py`.
+- The `DataProcessCode` directory is used for storing data preprocessing code. The files can be named according to the type of data being processed. For example, the code for processing POI data can be named `POI_processing.py`.
 
 - The `Experiments` directory is used to store the code for benchmark experiments.
 
@@ -46,20 +46,22 @@
 |  Vehicle speed   |    LA     |    5 mins    | 2012/03/01-2012/06/28 |
 |  Vehicle speed   |    BAY    |    5 mins    | 2017/01/01-2017/07/01 |
 |   Ride-sharing   |  Chicago  |   60 mins    | 2013/01/01-2022/03/31 |
+|   Ride-sharing   |    NYC    |   60 mins    | 2016/01/01-2023/06/01 |
 |      Metro       |    NYC    |   60 mins    | 2022/02/01-2023/12/21 |
 
 ## Dataset Overview
 
-|                      | Historical Wea. | Wea. Forecast | AQI  | Holiday |  TP  | POI  | Demo | Road |  AD  |
-| :------------------: | :-------------: | :-----------: | ---- | :-----: | :--: | :--: | :--: | :--: | :--: |
-|       Bike NYC       |        ✅        |               |      |         |      |      |      |      |      |
-|     Bike Chicago     |        ✅        |               |      |         |      |      |      |      |      |
-|       Bike DC        |        ✅        |               |      |         |      |      |      |      |      |
-| Pedestrian Melbourne |        ✅        |               |      |         |      |      |      |      |      |
-|       METR-LA        |        ✅        |               |      |         |      |      |      |      |      |
-|       PEMS-BAY       |        ✅        |               |      |         |      |      |      |      |      |
-|     Ride Chicago     |        ✅        |               |      |         |      |      |      |      |      |
-|      Metro NYC       |        ✅        |               |      |         |      |      |      |      |      |
+|                      | Historical Wea. | Wea. Forecast | AQI | Holiday |  TP   |  POI  | Demo  | Road  |  AD   |
+| :------------------: | :-------------: | :-----------: | --- | :-----: | :---: | :---: | :---: | :---: | :---: |
+|       Bike NYC       |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
+|     Bike Chicago     |        ✅        |               | ✅   |         |       |       |       |       |       |
+|       Bike DC        |        ✅        |               | ✅   |         |       |       |       |       |       |
+| Pedestrian Melbourne |        ✅        |       ✅       |     |         |       |       |       |       |       |
+|       METR-LA        |        ✅        |               | ✅   |         |       |       |       |       |       |
+|       PEMS-BAY       |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
+|       Taxi NYC       |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
+|     Ride Chicago     |        ✅        |               | ✅   |         |       |       |       |       |       |
+|      Metro NYC       |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
 
 
 
@@ -96,6 +98,24 @@ The metadata table is displayed as a table. You can use the following two exampl
 | Payment Method | Method used for payment                                                              | Credit Card, PayPal, Debit Card                                        |
 
 
+
+### Load and Use
+
+This section provides an overview of the steps for preparing and organizing contextual datasets. The following processes are included:
+
+1. **Data Preprocessing**: The data is preprocessed to align and filter the traffic data using a feature transformation script.
+2. **Storage of Processed Data**: The processed data is saved in a directory organized by area, road, and point of interest, so on, with files named `City+TimeSpan+DataType.csv` (e.g., `NYC_2016_2017_POI_transformed.npy`).
+3. **File Types**: Description of file types used for storing different kinds of information:
+   - `xxx.geo` for geographic entity attributes
+   - `xxx.rel` for relationships between entities
+   - `xxx.dyna` for traffic condition information.
+   - `config.json` for supplementary table descriptions.
+4. **Customization**: Users can create their own function for data preparation (i.e., transformation function) and run construction scripts to adapt to various datasets.
+
+
+
+## Historical Weather
+
 **Historical Weather**
 
 | Attribute       | Description                                                      | Example                                           |
@@ -122,7 +142,7 @@ The metadata table is displayed as a table. You can use the following two exampl
 | wdir            | Wind direction (angle)                                           | 10-360                                            |
 | wdir_cardinal   | Description of wind direction                                    | NE,S,N                                            |
 | gust            | Wind speed instantaneous value (miles per hour)                  | 16-74                                             |
-| wspd            | Wind Speed ​​(mph)                                                 | 0-60                                              |
+| wspd            | Wind Speed ​​(mph)                                               | 0-60                                              |
 | max_temp        | Maximum Temperature (Fahrenheit)                                 | -12-118                                           |
 | min_temp        | Minimum Temperature (Fahrenheit)                                 | -15-94                                            |
 | precip_total    | Total precipitation (inches)                                     | 0-4.88                                            |
@@ -133,7 +153,8 @@ The metadata table is displayed as a table. You can use the following two exampl
 | uv_index        | [UV Index](https://www.epa.gov/sunsafety/calculating-uv-index-0) | -618-12                                           |
 
 
-**Weather Forecast**
+
+## Weather Forecast
 
 | Attribute | Description                                                     | Example        |
 | --------- | --------------------------------------------------------------- | -------------- |
@@ -150,106 +171,34 @@ The metadata table is displayed as a table. You can use the following two exampl
 | tcc       | total cloud cover (Dimensionless)                               | 0.7, 1.0       |
 | tp        | total precipitation (metres)                                    | 0.02, 0.08     |
 
-
-### Load and Use
-
-This section provides an overview of the steps for preparing and organizing contextual datasets. The following processes are included:
-
-1. **Data Preprocessing**: The data is preprocessed to align and filter the traffic data using a feature transformation script.
-2. **Storage of Processed Data**: The processed data is saved in a directory organized by area, road, and point of interest, so on, with files named `City+TimeSpan+DataType.csv` (e.g., `NYC_2016_2017_POI_transformed.npy`).
-3. **File Types**: Description of file types used for storing different kinds of information:
-   - `xxx.geo` for geographic entity attributes
-   - `xxx.rel` for relationships between entities
-   - `xxx.dyna` for traffic condition information.
-   - `config.json` for supplementary table descriptions.
-4. **Customization**: Users can create their own function for data preparation (i.e., transformation function) and run construction scripts to adapt to various datasets.
-
-
-
-## Historical Weather
-
-数据字典，目前为中文，以方便查看，后续会翻译成英文
-- key: 观测站点的唯一标识符 - (str)
-- class: 观测的类别 - (str)
-- expire_time_gmt: 观测的过期时间 - (DATE)
-- obs_id: 观测的ID - (str)
-- obs_name: 观测站点的名称 - (str)
-- valid_time_gmt: 观测的有效时间 - (DATE)
-- day_ind: 一天中的时间段（白天或晚上） - (str)
-- temp: 温度（华氏度） - (float)
-- wx_icon: 天气图标的代码 - (int)
-- icon_extd: 天气图标的扩展代码 - (int)
-- wx_phrase: 天气短语描述 - (str)
-- pressure_tend: 气压变化趋势 - (int, 0-稳定, 1-上升, 2-下降)
-- pressure_desc: 气压描述 - (str, 其实就是前一字段的描述)
-- dewPt: 露点温度（华氏度） - (float)
-- heat_index: 酷热指数 - (float)
-- rh: 相对湿度 - (float)
-- pressure: 气压 - (float)
-- vis: 能见度（英里） - (int, 0-10)
-- wc: 风寒指数 - (float)
-- wdir: 风向（角度） - (int, 以北, 顺时针的角度[10-360], 360代表北) 
-- wdir_cardinal: 风向的助记符号 - (str, 描述风向, 比如N代表北风)
-- gust: 风速瞬时值（英里/小时） - (float)
-- wspd: 风速（英里/小时） - (float)
-- max_temp: 最高温度（华氏度） - (float)
-- min_temp: 最低温度（华氏度） - (float)
-- precip_total: 总降水量（英寸） - (float)
-- precip_hrly: 每小时降水量（英寸） - (float)
-- snow_hrly: 每小时降雪量（英寸） - (float)
-- uv_desc: 紫外线指数描述 - (str)
-- feels_like: 体感温度（华氏度） - (float)
-- uv_index: 紫外线指数 https://www.epa.gov/sunsafety/calculating-uv-index-0 - (float)
-
-(以下列除了clds，都无数据，只是爬取时有该列，但是并没有数据)
-- qualifier: 气象数据的限定条件
-- qualifier_svrty: 限定条件的严重程度
-- blunt_phrase: 概括的天气短语描述
-- terse_phrase: 简短的天气短语描述
-- clds: 云量 https://www.eoas.ubc.ca/courses/atsc113/flying/met_concepts/01-met_concepts/01c-cloud_coverage/index.html
-- water_temp: 水温
-- primary_wave_period: 主波周期
-- primary_wave_height: 主波高度
-- primary_swell_period: 主涌浪周期
-- primary_swell_height: 主涌浪高度
-- primary_swell_direction: 主涌浪方向
-- secondary_swell_period: 次涌浪周期
-- secondary_swell_height: 次涌浪高度
-- secondary_swell_direction: 次涌浪方向
-
-> 备注
-> - 2023/6/9 Melbourne数据集的时间范围有变化，重新爬取并处理  
-> 值得注意的是，新爬取到的Melbourne数据集，其valid_time_gmt，即时刻的格式，与之前爬取的数据的格式略有不同(用记事本打开就可以看出来），可能是datetime包更新了导致，在”analyze_wxx.ipynb”的“3. 先对其进行处理，使每小时内的所有数据合并”中，在第30行左右的，关于valid_time_gmt的处理代码，用于新爬取到的Melbourne上会报错（但是不是在此处报错，而是在后续运行”4.4 one-hot编码替换原始的wx_phrase”时，由于时间格式的不一致而导致处理函数不能正确处理，从而报错），需要专门为Melbourne调整一下，可以写个if来专门处理
-
-
-
-## Weather Forecast
-
-- 温度
-	- 温度 (Temperature) √
-	- 最高温度 (Maximum temperature) ×
-	- 最低温度 (Minimum temperature) ×
-	- 露点温度 (Dewpoint temperature) √ 
-- 湿度
-	- 相对湿度 (Relative humidity) √
-	- 比湿度 (Specific humidity) √
-- 能见度 (Visibility) √
-- 风速 (Wind speed (gust)) √
-- 风角度
-	- 风的 v 分量 (v-component of wind) √
-	- 风的 u 分量 (u-component of wind) √
-- 空气质量 ×
-- 天气状态 ×
-- 云层厚度
-	- 总云量 (Total cloud cover) √
-	- 高云量 (High cloud cover)  ×
-	- 中云量 (Medium cloud cover)  ×
-	- 低云量 (Low cloud cover)  ×
-- 风寒指数 ×
-- 
-
 ## AQI
 
+| Attribute                                                                                                  | Description                                                                                                                         | Example                                           |
+| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| State Code                                                                                                 |
+| The FIPS code of the state in which the monitor resides.                                                   | 36(New York)                                                                                                                        |
+| County Code                                                                                                | The FIPS code of the county in which the monitor resides.                                                                           | 5(Brox)                                           |
+| Site Num                                                                                                   | A unique number within the county identifying the site.                                                                             | 110                                               |
+| Parameter Code                                                                                             | The AQS code corresponding to the parameter measured by the monitor.                                                                | 42401(S02)                                        |
+| POC                                                                                                        | This is the “Parameter Occurrence Code” used to distinguish different instruments that measure the same parameter at the same site. | 1,2...                                            |
+| Latitude                                                                                                   | The monitoring site’s angular distance north of the equator measured in decimal degrees.                                            | 40.816                                            |
+| Longitude                                                                                                  | The monitoring site’s angular distance east of the prime meridian measured in decimal degrees.                                      | -73.902                                           |
+| Datum                                                                                                      | The Datum associated with the Latitude and Longitude measures.                                                                      | WGS84                                             |
+| Parameter Name                                                                                             | The name or description assigned in AQS to the parameter measured by the monitor. Parameters may be pollutants or non-pollutants    | Sulfur dioxide                                    |
+| Date Local                                                                                                 | The calendar date of the sample in Local Standard Time at the monitor.                                                              | 2022-02-01                                        |
+| Time Local                                                                                                 | The time of day that sampling began on a 24-hour clock in Local Standard Time.                                                      | 00:00                                             |
+| Sample Measurement                                                                                         | The measured value in the standard units of measure for the parameter.                                                              | 0.9                                               |
+| Units of Measure                                                                                           | The unit of measure for the parameter.                                                                                              | Parts per billion                                 |
+| MDL                                                                                                        | The Method Detection Limit.                                                                                                         | 0.2                                               |
+| Uncertainty                                                                                                | The total measurement uncertainty associated with a reported measurement as indicated by the reporting agency.                      | N/A                                               |
+| Qualifier                                                                                                  |
+| Sample values may have qualifiers that indicate why they are missing or that they are out of the ordinary. | N/A                                                                                                                                 |
+| Method Type                                                                                                | An indication of whether the method used to collect the data is a federal reference method (FRM)                                    | FEM                                               |
+| Method Code                                                                                                | An internal system code indicating the method (processes, equipment, and protocols) used in gathering and measuring the sample.     | 560                                               |
+| Method Name                                                                                                | A short description of the processes, equipment, and protocols used in gathering and measuring the sample.                          | INSTRUMENTAL - Pulsed Fluorescent 43C-TLE/43i-TLE |
+| State Name                                                                                                 | The name of the state where the monitoring site is located.                                                                         | New York                                          |
+| County Name                                                                                                | The name of the county where the monitoring site is located.                                                                        | Brox                                              |
+| Date of Last Change                                                                                        | The date the last time any numeric values in this record were updated in the AQS data system.                                       | 2022-04-21                                        |
 
 
 ## Holiday
