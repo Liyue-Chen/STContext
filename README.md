@@ -295,9 +295,28 @@ You can obtain raw AQI without missing values with code snippets above, however 
  - Holiday（在当前城市这一天是否为节假日）
  - Holiday_Type (如果是节假日，节假日的类型)
 
+| Attribute       | Description                                                      | Example                                           |
+| --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| Osm_id          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                          |
+| Name           | Name of the POI                                              | U.S.Bank                               |
+| Fclass | Category of the POI                              | Restaurant                               |
+| Other_tags          | Other information of the POI                                                   | "addr:city"=>"Santa Clara"                                              |
+| Lat        | Latitude of the POI                                      |  40.81632                                       |
+| Lng  |  Longitude of the POI                       | -73.90182                             |
 
 
 ## POI
+
+
+| Attribute       | Description                                                      | Example                                           |
+| --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| Osm_id          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                          |
+| Name           | Name of the POI                                              | U.S.Bank                               |
+| Fclass | Category of the POI                              | Restaurant                               |
+| Other_tags          | Other information of the POI                                                   | "addr:city"=>"Santa Clara"                                              |
+| Lat        | Latitude of the POI                                      |  40.81632                                       |
+| Lng  |  Longitude of the POI                       | -73.90182                             |
+
 
 The  folders  contain POI data for four cities and relative code.
 
@@ -618,6 +637,15 @@ Load the shape file and get a polygon. If the location of a point (latitude and 
 
 ## Demographics
 
+| Attribute       | Description                                                      | Example                                           |
+| --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| FIPSCode          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                   |
+| Year           | Name of the POI                                              | U.S.Bank                               |
+| GeoID | Category of the POI                              | Restaurant                               |
+| x_center          | Other information of the POI                                                   |                  |
+| y_center        | Latitude of the POI                                      |  40.81632                          |
+| tract_bloc        |                                      |  40.81632                          |
+
 
 
 ## Road Network
@@ -625,6 +653,16 @@ Load the shape file and get a polygon. If the location of a point (latitude and 
 
 
 ## Administrative Division
+| Attribute       | Description                                                      | Example                                           |
+| --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| ntaname          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                   |
+| ntaabbrev           | Name of the POI                                              | U.S.Bank                           |
+| shape_leng | Category of the POI                              | Restaurant                               |
+| Shape_Area          | Other information of the POI                                                   |                  |
+| y_center        | Latitude of the POI                                      |  40.81632                          |
+| x_center  |  Longitude of the POI                       | -73.90182                             |
+
+
 
 
 
