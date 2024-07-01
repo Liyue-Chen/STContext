@@ -54,13 +54,13 @@
 |                      | Historical Wea. | Wea. Forecast | AQI | Holiday |  TP   |  POI  | Demo  | Road  |  AD   |
 | :------------------: | :-------------: | :-----------: | --- | :-----: | :---: | :---: | :---: | :---: | :---: |
 |       Bike NYC       |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
-|     Bike Chicago     |        ✅        |               | ✅   |         |       |       |       |       |       |
-|       Bike DC        |        ✅        |               | ✅   |         |       |       |       |       |       |
+|     Bike Chicago     |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
+|       Bike DC        |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
 | Pedestrian Melbourne |        ✅        |       ✅       |     |         |       |       |       |       |       |
-|       METR-LA        |        ✅        |               | ✅   |         |       |       |       |       |       |
+|       METR-LA        |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
 |       PEMS-BAY       |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
 |       Taxi NYC       |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
-|     Ride Chicago     |        ✅        |               | ✅   |         |       |       |       |       |       |
+|     Ride Chicago     |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
 |      Metro NYC       |        ✅        |       ✅       | ✅   |         |       |       |       |       |       |
 
 
@@ -152,7 +152,33 @@ This section provides an overview of the steps for preparing and organizing cont
 | feels_like      | Feeling temperature (Fahrenheit)                                 | -41-114                                           |
 | uv_index        | [UV Index](https://www.epa.gov/sunsafety/calculating-uv-index-0) | -618-12                                           |
 
+### Load and Use
 
+```python
+import pandas as pd
+import os
+# dataset path configuration
+historical_weather_data_dir = '{your_dir_path}'
+city='NYC'
+start_date = '20130101'
+end_date = '20140101'
+context_type = 'Historical_Weather'
+dataset_name = '{}_{}_{}_{}.csv'.format(city, start_date, end_date, context_type)
+dataset_path = os.path.join(historical_weather_data_dir, dataset_name)
+
+# read csv
+df = pd.read_csv(dataset_path)
+
+# fill missing values with the previous value to prevent data leakage
+
+df.ffill(inplace=True)
+
+# more process steps(optional)
+
+
+
+```
+You can obtain raw historical weather without missing values with code snippets above, however if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py` 
 
 ## Weather Forecast
 
@@ -173,36 +199,86 @@ This section provides an overview of the steps for preparing and organizing cont
 | tcc       | total cloud cover (Dimensionless)                               | 0.7, 1.0       |
 | tp        | total precipitation (metres)                                    | 0.02, 0.08     |
 
+### Load and Use
+
+```python
+import pandas as pd
+import os
+# dataset path configuration
+historical_weather_data_dir = '{your_dir_path}'
+city='NYC'
+start_date = '20130101'
+end_date = '20140101'
+context_type = 'Weather_Forecast'
+dataset_name = '{}_{}_{}_{}.csv'.format(city, start_date, end_date, context_type)
+dataset_path = os.path.join(historical_weather_data_dir, dataset_name)
+
+# read csv
+df = pd.read_csv(dataset_path)
+
+# fill missing values with the previous value to prevent data leakage
+
+df.ffill(inplace=True)
+
+# more process steps(optional)
+
+```
+You can obtain raw weather forecast without missing values with code snippets above, however if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py` 
+
 ## AQI
 
 ### Meta Data
 
-| Attribute                                                                                                  | Description                                                                                                                         | Example                                           |
-| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| State Code                                                                                                 | The FIPS code of the state in which the monitor resides.                                                                            | 36(New York)                                      |
-| County Code                                                                                                | The FIPS code of the county in which the monitor resides.                                                                           | 5(Brox)                                           |
-| Site Num                                                                                                   | A unique number within the county identifying the site.                                                                             | 110                                               |
-| Parameter Code                                                                                             | The AQS code corresponding to the parameter measured by the monitor.                                                                | 42401(S02)                                        |
-| POC                                                                                                        | This is the “Parameter Occurrence Code” used to distinguish different instruments that measure the same parameter at the same site. | 1,2...                                            |
-| Latitude                                                                                                   | The monitoring site’s angular distance north of the equator measured in decimal degrees.                                            | 40.816                                            |
-| Longitude                                                                                                  | The monitoring site’s angular distance east of the prime meridian measured in decimal degrees.                                      | -73.902                                           |
-| Datum                                                                                                      | The Datum associated with the Latitude and Longitude measures.                                                                      | WGS84                                             |
-| Parameter Name                                                                                             | The name or description assigned in AQS to the parameter measured by the monitor. Parameters may be pollutants or non-pollutants    | Sulfur dioxide                                    |
-| Date Local                                                                                                 | The calendar date of the sample in Local Standard Time at the monitor.                                                              | 2022-02-01                                        |
-| Time Local                                                                                                 | The time of day that sampling began on a 24-hour clock in Local Standard Time.                                                      | 00:00                                             |
-| Sample Measurement                                                                                         | The measured value in the standard units of measure for the parameter.                                                              | 0.9                                               |
-| Units of Measure                                                                                           | The unit of measure for the parameter.                                                                                              | Parts per billion                                 |
-| MDL                                                                                                        | The Method Detection Limit.                                                                                                         | 0.2                                               |
-| Uncertainty                                                                                                | The total measurement uncertainty associated with a reported measurement as indicated by the reporting agency.                      | N/A                                               |
-| Qualifier                                                                                                  |
-| Sample values may have qualifiers that indicate why they are missing or that they are out of the ordinary. | N/A                                                                                                                                 |
-| Method Type                                                                                                | An indication of whether the method used to collect the data is a federal reference method (FRM)                                    | FEM                                               |
-| Method Code                                                                                                | An internal system code indicating the method (processes, equipment, and protocols) used in gathering and measuring the sample.     | 560                                               |
-| Method Name                                                                                                | A short description of the processes, equipment, and protocols used in gathering and measuring the sample.                          | INSTRUMENTAL - Pulsed Fluorescent 43C-TLE/43i-TLE |
-| State Name                                                                                                 | The name of the state where the monitoring site is located.                                                                         | New York                                          |
-| County Name                                                                                                | The name of the county where the monitoring site is located.                                                                        | Brox                                              |
-| Date of Last Change                                                                                        | The date the last time any numeric values in this record were updated in the AQS data system.                                       | 2022-04-21                                        |
+| Attribute           | Description                                                                                                                         | Example                                           |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| State Code          | The FIPS code of the state in which the monitor resides.                                                                            | 36(New York)                                      |
+| County Code         | The FIPS code of the county in which the monitor resides.                                                                           | 5(Brox)                                           |
+| Site Num            | A unique number within the county identifying the site.                                                                             | 110                                               |
+| Parameter Code      | The AQS code corresponding to the parameter measured by the monitor.                                                                | 42401(S02)                                        |
+| POC                 | This is the “Parameter Occurrence Code” used to distinguish different instruments that measure the same parameter at the same site. | 1,2...                                            |
+| Latitude            | The monitoring site’s angular distance north of the equator measured in decimal degrees.                                            | 40.816                                            |
+| Longitude           | The monitoring site’s angular distance east of the prime meridian measured in decimal degrees.                                      | -73.902                                           |
+| Datum               | The Datum associated with the Latitude and Longitude measures.                                                                      | WGS84                                             |
+| Parameter Name      | The name or description assigned in AQS to the parameter measured by the monitor. Parameters may be pollutants or non-pollutants    | Sulfur dioxide                                    |
+| Date Local          | The calendar date of the sample in Local Standard Time at the monitor.                                                              | 2022-02-01                                        |
+| Time Local          | The time of day that sampling began on a 24-hour clock in Local Standard Time.                                                      | 00:00                                             |
+| Sample Measurement  | The measured value in the standard units of measure for the parameter.                                                              | 0.9                                               |
+| Units of Measure    | The unit of measure for the parameter.                                                                                              | Parts per billion                                 |
+| MDL                 | The Method Detection Limit.                                                                                                         | 0.2                                               |
+| Uncertainty         | The total measurement uncertainty associated with a reported measurement as indicated by the reporting agency.                      | N/A                                               |
+| Qualifier           | Sample values may have qualifiers that indicate why they are missing or that they are out of the ordinary.                          | N/A                                               |
+| Method Type         | An indication of whether the method used to collect the data is a federal reference method (FRM)                                    | FEM                                               |
+| Method Code         | An internal system code indicating the method (processes, equipment, and protocols) used in gathering and measuring the sample.     | 560                                               |
+| Method Name         | A short description of the processes, equipment, and protocols used in gathering and measuring the sample.                          | INSTRUMENTAL - Pulsed Fluorescent 43C-TLE/43i-TLE |
+| State Name          | The name of the state where the monitoring site is located.                                                                         | New York                                          |
+| County Name         | The name of the county where the monitoring site is located.                                                                        | Brox                                              |
+| Date of Last Change | The date the last time any numeric values in this record were updated in the AQS data system.                                       | 2022-04-21                                        |
 
+### Load and Use
+
+```python
+import pandas as pd
+import os
+# dataset path configuration
+historical_weather_data_dir = '{your_dir_path}'
+city='NYC'
+start_date = '20130101'
+end_date = '20140101'
+context_type = 'AQI'
+dataset_name = '{}_{}_{}_{}.csv'.format(city, start_date, end_date, context_type)
+dataset_path = os.path.join(historical_weather_data_dir, dataset_name)
+
+# read csv
+df = pd.read_csv(dataset_path)
+
+# fill missing values with the previous value to prevent data leakage
+
+df.ffill(inplace=True)
+
+# more process steps(optional)
+
+```
+You can obtain raw AQI without missing values with code snippets above, however if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
 
 ## Holiday
 
