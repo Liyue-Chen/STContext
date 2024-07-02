@@ -647,6 +647,23 @@ Load the shape file and get a polygon. If the location of a point (latitude and 
 | tract_bloc        |                                      |  40.81632                          |
 
 
+### Load and Use
+
+```python
+
+#Specify the data set and the corresponding time.
+City='Bike_DC'
+R='500'
+import pickle
+
+# Specify the file path.
+file_path = '{}__demographic_{}.pkl'.format(City,R)
+
+# Load POI data.
+with open(file_path, 'rb') as f:
+    data = pickle.load(f)
+```
+
 
 ## Road Network
 | Attribute       | Description                                                      | Example                                           |
@@ -656,6 +673,23 @@ Load the shape file and get a polygon. If the location of a point (latitude and 
 | Other_tags          | Other information of the road                                                |   0.00035               |
 | Z_order        | Z_order is a field in osm2pgsql datamodel                                   |   6            |
 | polygon  |  The latitude and longitude coordinates of polygon vertices                       | ((-73.2521,40.2598),(-73.3451,42.9821),(-73,1120,42.3696))                     |
+
+### Load and Use
+
+```python
+
+#Specify the data set and the corresponding time.
+City='Bike_DC'
+R='500'
+import pickle
+
+# Specify the file path.
+file_path = '{}__Road_{}.pkl'.format(City,R)
+
+# Load POI data.
+with open(file_path, 'rb') as f:
+    data = pickle.load(f)
+```
 
 
 
@@ -670,9 +704,22 @@ Load the shape file and get a polygon. If the location of a point (latitude and 
 | x_center  |  Longitude of the POI                       | -73.90182                             |
 
 
+### Load and Use
 
+```python
 
+#Specify the data set and the corresponding time.
+City='Bike_DC'
+R='500'
+import pickle
 
+# Specify the file path.
+file_path = '{}__district_{}.pkl'.format(City,R)
+
+# Load POI data.
+with open(file_path, 'rb') as f:
+    data = pickle.load(f)
+```
 
 
 
