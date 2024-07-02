@@ -53,15 +53,15 @@
 
 |                      | Historical Wea. | Wea. Forecast | AQI | Holiday |  TP   |  POI  | Demo  | Road  |  AD   |
 | :------------------: | :-------------: | :-----------: | --- | :-----: | :---: | :---: | :---: | :---: | :---: |
-|       Bike NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |  ✅     |   ✅    |   ✅    |
-|     Bike Chicago     |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |   ✅    |   ✅    |  ✅     |  ✅     |
-|       Bike DC        |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |  ✅     |  ✅     |  ✅     |
-| Pedestrian Melbourne |        ✅        |       ✅       |     |   ✅      |   ✅    |  ✅     |   ✅    |  ✅     |   ✅    |
-|       METR-LA        |        ✅        |       ✅       | ✅   |  ✅       |   ✅    |  ✅     | ✅      | ✅      |  ✅     |
-|       PEMS-BAY       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |  ✅     |  ✅     |  ✅     |
-|       Taxi NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |✅       | ✅      |   ✅    |
-|     Ride Chicago     |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |   ✅    | ✅      |   ✅    |   ✅    |
-|      Metro NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |   ✅    |  ✅     |  ✅     |
+|       Bike NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |       |   ✅    |   ✅    |
+|     Bike Chicago     |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |   ✅    |       |  ✅     |  ✅     |
+|       Bike DC        |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |       |  ✅     |  ✅     |
+| Pedestrian Melbourne |        ✅        |       ✅       |     |   ✅      |   ✅    |  ✅     |      |  ✅     |   ✅    |
+|       METR-LA        |        ✅        |       ✅       | ✅   |  ✅       |   ✅    |  ✅     |      | ✅      |  ✅     |
+|       PEMS-BAY       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |       |  ✅     |  ✅     |
+|       Taxi NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |      | ✅      |   ✅    |
+|     Ride Chicago     |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |       |      |   ✅    |   ✅    |
+|      Metro NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |       |  ✅     |  ✅     |
 
 
 
