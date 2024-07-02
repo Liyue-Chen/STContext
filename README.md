@@ -690,7 +690,7 @@ gdf = gpd.read_file(dataset_path)
 | --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
 | Name           |  Name of the road             | 55th Street                           |
 | Highway |     Category of the road                         |       motorway                         |
-| Other_tags          | Other information of the road                                                |   0.00035               |
+| Other_tags          | Other information of the road                                                |   "oneway"=>"yes"               |
 | Z_order        | Z_order is a field in osm2pgsql datamodel                                   |   6            |
 | polygon  |  The latitude and longitude coordinates of lines                       | ((-73.2521,40.2598),(-73.3451,42.9821),(-73,1120,42.3696))                     |
 
