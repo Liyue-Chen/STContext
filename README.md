@@ -322,7 +322,7 @@ You can use the following code to load data of Holiday for different datasets. H
 | --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
 | Osm_id          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                          |
 | Name           | Name of the POI                                              | U.S.Bank                               |
-| Fclass | Category of the POI                              | Restaurant                               |
+| Fclass | Category of the POI                              | Bank                               |
 | Other_tags          | Other information of the POI                                                   | "addr:city"=>"Santa Clara"                                              |
 | Lat        | Latitude of the POI                                      |  40.81632                                       |
 | Lng  |  Longitude of the POI                       | -73.90182                             |
@@ -654,8 +654,8 @@ Load the shape file and get a polygon. If the location of a point (latitude and 
 | Attribute       | Description                                                      | Example                                           |
 | --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
 | FIPSCode          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                   |
-| Year           | Name of the POI                                              | U.S.Bank                               |
-| GeoID | Category of the POI                              | Restaurant                               |
+| Year           | Name of the POI                                              | 2013                               |
+| GeoID | Category of the POI                              | 170319801001010                               |
 | x_center          | Other information of the POI                |      40.81632              |
 | y_center        | Latitude of the POI                                      |       -73.2562                   |
 | tract_bloc        |    The number of the census block and census tract where it is located                                  |    9801001010                       |
@@ -721,13 +721,14 @@ You can use the following code to load raw context data of road network for diff
 ## Administrative Division
 | Attribute       | Description                                                      | Example                                           |
 | --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
-| ntaname          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                   |
-| ntaabbrev           | Name of the POI                                              | U.S.Bank                           |
-| shape_leng | Category of the POI                              | Restaurant                               |
-| Shape_Area          | Other information of the POI                                                   |     0.00035             |
-| y_center        | Latitude of the POI                                      |  40.81632                          |
-| x_center  |  Longitude of the POI                       | -73.90182                             |
-| polygon  |  The latitude and longitude coordinates of polygon vertices                       | ((-73.2521,40.2598),(-73.3451,42.9821),(-73,1120,42.3696))                     |
+| ntaname          | Name of this Neighborhood |    Greenpoint                   |
+| ntaabbrev           |  An abbreviation of Neighborhood area name             | Grnpt                           |
+| shape_leng | The length of region                              | 28912.56                               |
+| Shape_Area          | The Area of region                                                |   0.00035               |
+| y_center        | Longitude of the Neighborhood's center                                      |  40.81632                          |
+| x_center  |  Latitude of the Neighborhood's center                       | -73.90182                             |
+| polygon  |  The latitude and longitude coordinates of polygon vertices             | ((-73.2521,40.2598),(-73.3451,42.9821),(-73,1120,42.3696))                     |
+
 
 
 ### Load and Use
