@@ -297,12 +297,32 @@ You can obtain raw AQI without missing values with code snippets above, however 
 
 | Attribute       | Description                                                      | Example                                           |
 | --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
-| Osm_id          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                          |
-| Name           | Name of the POI                                              | U.S.Bank                               |
-| Fclass | Category of the POI                              | Restaurant                               |
-| Other_tags          | Other information of the POI                                                   | "addr:city"=>"Santa Clara"                                              |
-| Lat        | Latitude of the POI                                      |  40.81632                                       |
-| Lng  |  Longitude of the POI                       | -73.90182                             |
+| Date          | The date of timestamp |    2013/7/1                          |
+| Holiday           | Is it a holiday or not?                                  | 0 means no, 1 means yes.                         |
+| Holiday_Type | Category of the holiday                              | Thanksgiving Day                             |
+
+### Load and Use
+
+```python
+
+
+# dataset path configuration
+user_data_dir = '{your_dir_path}'
+City='Bike_DC'
+Year='2013'
+import pickle
+
+# Specify the file path.
+file_path = '{}__Holiday_{}.pkl'.format(City,Year)
+
+dataset_path = os.path.join(user_data_dir, file_path)
+
+# Load POI data.
+with open(dataset_path, 'rb') as f:
+    data = pickle.load(f)
+```
+You can use the following code to load data of Holiday for different datasets. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
+
 
 
 ## POI
@@ -564,6 +584,8 @@ for i in range(int(Time_begin),int(Time_end)+1):
 If we use python:
 ```Python
 #Specify the data set and the corresponding time.
+# dataset path configuration
+user_data_dir = '{your_dir_path}'
 Time='2013-01-01'
 City='Bike_DC'
 R='130'
@@ -572,11 +594,13 @@ import pickle
 # Specify the file path.
 file_path = '{}_{}_R=={}.pkl'.format(City,Time,R)
 
+dataset_path = os.path.join(user_data_dir, file_path)
+
 # Load POI data.
-with open(file_path, 'rb') as f:
+with open(dataset_path, 'rb') as f:
     data = pickle.load(f)  
 ```
-
+You can use the following code to load raw context data of POI. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
 **Scene divide Dataset：**
 
 
@@ -642,25 +666,30 @@ Load the shape file and get a polygon. If the location of a point (latitude and 
 | FIPSCode          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                   |
 | Year           | Name of the POI                                              | U.S.Bank                               |
 | GeoID | Category of the POI                              | Restaurant                               |
-| x_center          | Other information of the POI                                                   |                  |
-| y_center        | Latitude of the POI                                      |  40.81632                          |
-| tract_bloc        |                                      |  40.81632                          |
+| x_center          | Other information of the POI                |      40.81632              |
+| y_center        | Latitude of the POI                                      |       -73.2562                   |
+| tract_bloc        |    The number of the census block and census tract where it is located                                  |    9801001010                       |
+| polygon  |  The latitude and longitude coordinates of polygon vertices                       | ((-73.2521,40.2598),(-73.3451,42.9821),(-73,1120,42.3696))                     |
 
+You can use the following code to load raw context data of demographics. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
 
 ### Load and Use
 
 ```python
 
-#Specify the data set and the corresponding time.
+# dataset path configuration
+user_data_dir = '{your_dir_path}'
 City='Bike_DC'
+Year='2013'
 R='500'
 import pickle
 
 # Specify the file path.
-file_path = '{}__demographic_{}.pkl'.format(City,R)
+file_path = '{}__demographic_{}_{}.pkl'.format(City,R,Year)
+dataset_path = os.path.join(user_data_dir, file_path)
 
 # Load POI data.
-with open(file_path, 'rb') as f:
+with open(dataset_path, 'rb') as f:
     data = pickle.load(f)
 ```
 
@@ -672,25 +701,28 @@ with open(file_path, 'rb') as f:
 | Highway |     Category of the road                         |       motorway                         |
 | Other_tags          | Other information of the road                                                |   0.00035               |
 | Z_order        | Z_order is a field in osm2pgsql datamodel                                   |   6            |
-| polygon  |  The latitude and longitude coordinates of polygon vertices                       | ((-73.2521,40.2598),(-73.3451,42.9821),(-73,1120,42.3696))                     |
+| polygon  |  The latitude and longitude coordinates of lines                       | ((-73.2521,40.2598),(-73.3451,42.9821),(-73,1120,42.3696))                     |
 
 ### Load and Use
 
 ```python
 
-#Specify the data set and the corresponding time.
+# dataset path configuration
+user_data_dir = '{your_dir_path}'
 City='Bike_DC'
+Year='2013'
 R='500'
 import pickle
 
 # Specify the file path.
-file_path = '{}__Road_{}.pkl'.format(City,R)
+file_path = '{}__Road_{}_{}.pkl'.format(City,R,Year)
+dataset_path = os.path.join(user_data_dir, file_path)
 
 # Load POI data.
-with open(file_path, 'rb') as f:
+with open(user_data_dir, 'rb') as f:
     data = pickle.load(f)
 ```
-
+You can use the following code to load raw context data of road network for different datasets. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
 
 
 ## Administrative Division
@@ -699,28 +731,33 @@ with open(file_path, 'rb') as f:
 | ntaname          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                   |
 | ntaabbrev           | Name of the POI                                              | U.S.Bank                           |
 | shape_leng | Category of the POI                              | Restaurant                               |
-| Shape_Area          | Other information of the POI                                                   |                  |
+| Shape_Area          | Other information of the POI                                                   |     0.00035             |
 | y_center        | Latitude of the POI                                      |  40.81632                          |
 | x_center  |  Longitude of the POI                       | -73.90182                             |
+| polygon  |  The latitude and longitude coordinates of polygon vertices                       | ((-73.2521,40.2598),(-73.3451,42.9821),(-73,1120,42.3696))                     |
 
 
 ### Load and Use
 
 ```python
 
-#Specify the data set and the corresponding time.
+# dataset path configuration
+user_data_dir = '{your_dir_path}'
 City='Bike_DC'
+Year='2013'
 R='500'
 import pickle
 
 # Specify the file path.
-file_path = '{}__district_{}.pkl'.format(City,R)
+file_path = '{}__district_{}_{}.pkl'.format(City,R,Year)
+dataset_path = os.path.join(user_data_dir, file_path)
 
 # Load POI data.
-with open(file_path, 'rb') as f:
+with open(dataset_path, 'rb') as f:
     data = pickle.load(f)
 ```
 
+You can use the following code to load raw context data of administrative division for different datasets. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
 
 
 
