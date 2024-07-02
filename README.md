@@ -59,8 +59,8 @@
 | Pedestrian Melbourne |        ✅        |       ✅       |     |   ✅      |   ✅    |  ✅     |      |  ✅     |   ✅    |
 |       METR-LA        |        ✅        |       ✅       | ✅   |  ✅       |   ✅    |  ✅     |      | ✅      |  ✅     |
 |       PEMS-BAY       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |       |  ✅     |  ✅     |
-|       Taxi NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |      | ✅      |   ✅    |
-|     Ride Chicago     |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |       |      |   ✅    |   ✅    |
+|       Taxi NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |       |      |      |   ✅    |
+|     Ride Chicago     |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |       |      |      |   ✅    |
 |      Metro NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |       |  ✅     |  ✅     |
 
 
