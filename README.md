@@ -683,14 +683,15 @@ City='Bike_DC'
 Year='2013'
 R='500'
 import pickle
+import geopandas as gpd
+from shapely.geometry import Point
 
 # Specify the file path.
 file_path = '{}__demographic_{}_{}.pkl'.format(City,R,Year)
 dataset_path = os.path.join(user_data_dir, file_path)
 
-# Load POI data.
-with open(dataset_path, 'rb') as f:
-    data = pickle.load(f)
+# Load AD data.
+gdf = gpd.read_file(dataset_path)
 ```
 
 
@@ -713,14 +714,16 @@ City='Bike_DC'
 Year='2013'
 R='500'
 import pickle
+import geopandas as gpd
+from shapely.geometry import Point
 
 # Specify the file path.
-file_path = '{}__Road_{}_{}.pkl'.format(City,R,Year)
+file_path = '{}__road_{}_{}.pkl'.format(City,R,Year)
 dataset_path = os.path.join(user_data_dir, file_path)
 
-# Load POI data.
-with open(user_data_dir, 'rb') as f:
-    data = pickle.load(f)
+# Load road data.
+gdf = gpd.read_file(dataset_path)
+
 ```
 You can use the following code to load raw context data of road network for different datasets. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
 
@@ -747,14 +750,16 @@ City='Bike_DC'
 Year='2013'
 R='500'
 import pickle
+import geopandas as gpd
+from shapely.geometry import Point
 
 # Specify the file path.
 file_path = '{}__district_{}_{}.pkl'.format(City,R,Year)
 dataset_path = os.path.join(user_data_dir, file_path)
 
-# Load POI data.
-with open(dataset_path, 'rb') as f:
-    data = pickle.load(f)
+# Load AD data.
+gdf = gpd.read_file(dataset_path)
+
 ```
 
 You can use the following code to load raw context data of administrative division for different datasets. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
