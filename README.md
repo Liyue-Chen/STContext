@@ -51,7 +51,7 @@
 
 ## Dataset Overview
 
-|                      | Historical Wea. | Wea. Forecast | AQI | Holiday |  TP   |  POI  | Demo  | Road  |  AD   |
+|                      | Historical Wea. | Wea. Forecast | AQI | Holiday |  TP   |  POI  | Demo  | Road Network  |  AD   |
 | :------------------: | :-------------: | :-----------: | --- | :-----: | :---: | :---: | :---: | :---: | :---: |
 |       Bike NYC       |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |  ✅     |       |   ✅    |   ✅    |
 |     Bike Chicago     |        ✅        |       ✅       | ✅   |  ✅       |  ✅     |   ✅    |       |  ✅     |  ✅     |
