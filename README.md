@@ -298,18 +298,20 @@ You can obtain raw AQI without missing values with code snippets above, however 
 
 # dataset path configuration
 user_data_dir = '{your_dir_path}'
-City='Bike_DC'
+City='DC'
 Year='2013'
 import pickle
+import pandas as pd
 
 # Specify the file path.
-file_path = '{}__Holiday_{}.pkl'.format(City,Year)
+file_path = 'Holiday_{}_{}.csv'.format(City,Year)
 
 dataset_path = os.path.join(user_data_dir, file_path)
 
-# Load POI data.
-with open(dataset_path, 'rb') as f:
-    data = pickle.load(f)
+# Load Holiday data.
+df = pd.read_csv('{}'.format(dataset_path))
+print(df.head())
+
 ```
 You can use the following code to load data of Holiday for different datasets. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
 
@@ -341,15 +343,16 @@ user_data_dir = '{your_dir_path}'
 City='DC'
 Year='2013'
 import pickle
-
+import pandas as pd
 # Specify the file path.
-file_path = '{}___{}.pkl'.format(City,Year)
+file_path = 'POI_{}-{}.xls'.format(City,Year)
 
 dataset_path = os.path.join(user_data_dir, file_path)
+df = pd.read_excel(dataset_path)  
 
 # Load POI data.
-with open(dataset_path, 'rb') as f:
-    data = pickle.load(f)
+print(df.head())
+
 ```
 
 
@@ -375,19 +378,22 @@ You can use the following code to load raw context data of demographics. However
 
 # dataset path configuration
 user_data_dir = '{your_dir_path}'
-City='Bike_DC'
+City='DC'
 Year='2013'
-R='500'
 import pickle
+import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
 
 # Specify the file path.
-file_path = '{}__demographic_{}_{}.pkl'.format(City,R,Year)
-dataset_path = os.path.join(user_data_dir, file_path)
+CSV_file_path = '{}_{}_Census.csv'.format(City,Year)
+Shp_file_path = '{}_{}_Census.shp'.format(City,Year)
+CSV_dataset_path = os.path.join(user_data_dir, CSV_file_path)
+Shp_file_path = os.path.join(user_data_dir, Shp_file_path)
 
-# Load AD data.
-gdf = gpd.read_file(dataset_path)
+# Load Demographic data.
+gdf = gpd.read_file(Shp_file_path)
+df = pd.read_csv('{}'.format(CSV_dataset_path))
 ```
 
 
@@ -407,15 +413,14 @@ gdf = gpd.read_file(dataset_path)
 
 # dataset path configuration
 user_data_dir = '{your_dir_path}'
-City='Bike_DC'
+City='DC'
 Year='2013'
-R='500'
 import pickle
 import geopandas as gpd
 from shapely.geometry import Point
 
 # Specify the file path.
-file_path = '{}__road_{}_{}.pkl'.format(City,R,Year)
+file_path = 'Road{}{}.shp'.format(City,Year)
 dataset_path = os.path.join(user_data_dir, file_path)
 
 # Load road data.
@@ -445,15 +450,13 @@ You can use the following code to load raw context data of road network for diff
 
 # dataset path configuration
 user_data_dir = '{your_dir_path}'
-City='Bike_DC'
-Year='2013'
-R='500'
+City='DC'
 import pickle
 import geopandas as gpd
 from shapely.geometry import Point
 
 # Specify the file path.
-file_path = '{}__district_{}_{}.pkl'.format(City,R,Year)
+file_path = 'AdministrativeDivision_{}.pkl'.format(City)
 dataset_path = os.path.join(user_data_dir, file_path)
 
 # Load AD data.
