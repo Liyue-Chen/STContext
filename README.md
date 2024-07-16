@@ -364,7 +364,7 @@ print(df.head())
 | --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
 | FIPSCode          | Unique identifier used to identify map elements in OpenStreetMap |    42538083                   |
 | Year           | Name of the POI                                              | 2013                               |
-| GeoID | Category of the POI                              | 170319801001010                               |
+| GeoID | Category of the POI                              | G170319801001010                               |
 | x_center          | Other information of the POI                |      40.81632              |
 | y_center        | Latitude of the POI                                      |       -73.2562                   |
 | tract_bloc        |    The number of the census block and census tract where it is located                                  |    9801001010                       |
