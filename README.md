@@ -158,7 +158,7 @@ This section provides an overview of the steps for preparing and organizing cont
 import pandas as pd
 import os
 # dataset path configuration
-historical_weather_data_dir = '{your_dir_path}'
+stcontext_data_dir = '{your_dir_path}'
 city='NYC'
 start_date = '20130101'
 end_date = '20140101'
@@ -205,16 +205,16 @@ You can obtain raw historical weather without missing values with code snippets 
 import pandas as pd
 import os
 # dataset path configuration
-historical_weather_data_dir = '{your_dir_path}'
+stcontext_data_dir = '{your_dir_path}'
 city='NYC'
 start_date = '20130101'
 end_date = '20140101'
-context_type = 'Weather_Forecast'
-dataset_name = '{}_{}_{}_{}.csv'.format(city, start_date, end_date, context_type)
+context_type = 'WeatherForecast'
+dataset_name = '{}_{}_{}_{}.parquet'.format(city, start_date, end_date, context_type)
 dataset_path = os.path.join(historical_weather_data_dir, dataset_name)
 
 # read csv
-df = pd.read_csv(dataset_path)
+df = pd.read_parquet(dataset_path)
 
 # fill missing values with the previous value to prevent data leakage
 
@@ -260,7 +260,7 @@ You can obtain raw weather forecast without missing values with code snippets ab
 import pandas as pd
 import os
 # dataset path configuration
-historical_weather_data_dir = '{your_dir_path}'
+stcontext_data_dir = '{your_dir_path}'
 city='NYC'
 start_date = '20130101'
 end_date = '20140101'
