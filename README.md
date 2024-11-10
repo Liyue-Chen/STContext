@@ -466,5 +466,13 @@ gdf = gpd.read_file(dataset_path)
 
 You can use the following code to load raw context data of administrative division for different datasets. However, if you want to make traffic prediction with them, you need to preprocess the data to align with the traffic data. We implement a `context_dataloader` to align context data with crowd flow data. More details please refer to `UCTB/dataset/context_dataloader.py`
 
+## Empirical Study
+
+### Spatio-temporal Context
+
+The dataset we used in empirical study is stored in the [link](https://pan.baidu.com/s/1cCgWWuje0p1bKFaOyz1fAQ?pwd=475k) with code 475k.
+
+The corresponding experiment scripts locate in `Experiment/stcontext/`.
+
 
 
